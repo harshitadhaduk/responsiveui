@@ -21,6 +21,18 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     "Jukebox",
     "Indian soap operas",
   ];
+
+  // List data = [
+  //   "All",
+  //   "Mixes",
+  //   "Music",
+  //   "Live",
+  //   "News",
+  //   "Flutter",
+  //   "Jukebox",
+  //   "Indian soap operas",
+  // ];
+
   int select = 0;
   List<Map<String, dynamic>> allData = [
     {
