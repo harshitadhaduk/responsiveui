@@ -10,6 +10,7 @@ class YoutubeUiScreen extends StatefulWidget {
 }
 
 class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
+  ScrollController scrollController = ScrollController();
   bool isHover = false;
   List data = [
     "All",
@@ -21,18 +22,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     "Jukebox",
     "Indian soap operas",
   ];
-
-  // List data = [
-  //   "All",
-  //   "Mixes",
-  //   "Music",
-  //   "Live",
-  //   "News",
-  //   "Flutter",
-  //   "Jukebox",
-  //   "Indian soap operas",
-  // ];
-
   int select = 0;
   List<Map<String, dynamic>> allData = [
     {
@@ -108,6 +97,35 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
       "logo": Colors.blue,
     },
   ];
+  List<Map<String, dynamic>> allData2 = [
+    {"icon": Icons.home, "name": "Home"},
+    {"icon": Icons.send, "name": "Shorts"},
+    {"icon": Icons.subscriptions, "name": "Subscription"},
+    {"icon": Icons.history, "name": "History"},
+    {"icon": Icons.playlist_add, "name": "Playlists"},
+    {"icon": Icons.watch_later_outlined, "name": "Watch Later"},
+    {"icon": Icons.thumb_up_alt_outlined, "name": "Liked videos"},
+    {"icon": Icons.trending_down, "name": "Trending"},
+    {"icon": Icons.shopping_bag_outlined, "name": "Shopping"},
+    {"icon": Icons.music_note, "name": "Music"},
+    {"icon": Icons.drive_file_move, "name": "Films"},
+    {"icon": Icons.connect_without_contact_outlined, "name": "Live"},
+    {"icon": Icons.games, "name": "Gaming"},
+    {"icon": Icons.newspaper, "name": "News"},
+    {"icon": Icons.ac_unit, "name": "Sport"},
+    {"icon": Icons.check_box_outline_blank_rounded, "name": "Course"},
+    {"icon": Icons.e_mobiledata_sharp, "name": "Fashion & Beauty"},
+    {"icon": Icons.podcasts, "name": "Podcasts"},
+    {"icon": Icons.play_arrow, "name": "YouTube Premium"},
+    {"icon": Icons.play_arrow, "name": "YouTube Music"},
+    {"icon": Icons.play_arrow, "name": "YouTube Kids"},
+    {"icon": Icons.settings, "name": "Setting"},
+    {"icon": Icons.flag, "name": "Report History"},
+    {"icon": Icons.help, "name": "Help"},
+    {"icon": Icons.help_center_outlined, "name": "Send FeedBack"},
+    {"icon": Icons.abc, "name": ""},
+  ];
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -117,7 +135,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
-          child: width <= 520
+          child: width <= 600
               ? Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.04 * width),
                   child: Column(
@@ -357,7 +375,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                     ],
                   ),
                 )
-              : width > 520 && width <= 1080
+              : width > 600 && width <= 1080
                   ? Column(
                       children: [
                         (0.01 * height).addHSpace(),
@@ -713,6 +731,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
+                                          childAspectRatio: 0.00135 * width,
                                           mainAxisSpacing: 0.02 * height,
                                         ),
                                         itemCount: allData.length,
@@ -758,7 +777,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               color:
                                                                   Colors.white,
                                                               fontSize:
-                                                                  0.022 * width,
+                                                                  0.02 * width,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -770,7 +789,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                           style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize:
-                                                                0.021 * width,
+                                                                0.02 * width,
                                                           ),
                                                         ),
                                                         Row(
@@ -780,9 +799,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               style: TextStyle(
                                                                 color:
                                                                     Colors.grey,
-                                                                fontSize:
-                                                                    0.022 *
-                                                                        width,
+                                                                fontSize: 0.02 *
+                                                                    width,
                                                               ),
                                                             ),
                                                             (0.01 * width)
@@ -801,9 +819,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               style: TextStyle(
                                                                 color:
                                                                     Colors.grey,
-                                                                fontSize:
-                                                                    0.022 *
-                                                                        width,
+                                                                fontSize: 0.02 *
+                                                                    width,
                                                               ),
                                                             ),
                                                           ],
@@ -833,8 +850,9 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                       ],
                     )
                   : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        (0.01 * height).addHSpace(),
+                        (0.015 * height).addHSpace(),
                         Padding(
                           padding:
                               EdgeInsets.symmetric(horizontal: 0.02 * width),
@@ -850,7 +868,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 hoverColor: Colors.grey.withOpacity(0.4),
                                 child: const Icon(Icons.menu),
                               ),
-                              (0.03 * width).addWSpace(),
+                              (0.02 * width).addWSpace(),
                               Container(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 0.01 * width,
@@ -873,10 +891,10 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   fontSize: 0.02 * width,
                                 ),
                               ),
-                              const Spacer(),
+                              (0.1 * width).addWSpace(),
                               Container(
                                 height: 0.05 * height,
-                                width: 0.35 * width,
+                                width: 0.4 * width,
                                 decoration: BoxDecoration(
                                   color: Colors.grey.withOpacity(0.4),
                                   borderRadius:
@@ -894,7 +912,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       decoration: InputDecoration(
                                         constraints: BoxConstraints.expand(
                                           height: 0.05 * height,
-                                          width: 0.3 * width,
+                                          width: 0.35 * width,
                                         ),
                                         hintText: "Search",
                                         filled: true,
@@ -933,7 +951,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   ],
                                 ),
                               ),
-                              const Spacer(),
+                              (0.02 * width).addWSpace(),
                               InkResponse(
                                 onTap: () {},
                                 onHover: (value) {
@@ -962,7 +980,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 hoverColor: Colors.grey.withOpacity(0.4),
                                 child: const Icon(Icons.video_call_outlined),
                               ),
-                              (0.04 * width).addWSpace(),
+                              (0.02 * width).addWSpace(),
                               InkResponse(
                                 onTap: () {},
                                 onHover: (value) {
@@ -973,7 +991,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 hoverColor: Colors.grey.withOpacity(0.4),
                                 child: const Icon(Icons.notifications_active),
                               ),
-                              (0.04 * width).addWSpace(),
+                              (0.02 * width).addWSpace(),
                               CircleAvatar(
                                 backgroundColor: Colors.purple.shade300,
                                 child: const Text(
@@ -986,152 +1004,336 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                             ],
                           ),
                         ),
-                        (0.01 * height).addHSpace(),
-                        SizedBox(
-                          height: 0.05 * height,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            itemCount: data.length,
-                            itemBuilder: (context, index) {
-                              return InkResponse(
-                                onTap: () {
-                                  setState(() {
-                                    select = index;
-                                  });
-                                },
-                                onHover: (value) {
-                                  setState(() {
-                                    isHover = value;
-                                  });
-                                },
-                                borderRadius:
-                                    BorderRadius.circular(0.01 * height),
-                                highlightShape: BoxShape.rectangle,
-                                hoverColor: Colors.grey.withOpacity(0.1),
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 0.005 * width),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 0.02 * width,
-                                      vertical: 0.01 * height),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(0.015 * height),
-                                    color: select == index
-                                        ? Colors.white
-                                        : Colors.grey.withOpacity(0.2),
-                                  ),
-                                  child: Text(
-                                    "${data[index]}",
-                                    style: TextStyle(
-                                      color: select == index
-                                          ? Colors.black
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        (0.01 * height).addHSpace(),
-                        SizedBox(
-                          height: context.height,
-                          width: double.infinity,
-                          child: GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 0.02 * height,
-                            ),
-                            itemCount: allData.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 0.01 * width,
-                                    vertical: 0.01 * height),
-                                child: SizedBox(
-                                  height: double.infinity,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 0.3 * height,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: allData[index]["image"],
-                                          borderRadius: BorderRadius.circular(
-                                              0.01 * height),
-                                        ),
-                                      ),
-                                      (0.01 * height).addHSpace(),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 0.018 * width,
-                                            backgroundColor: allData[index]
-                                                ["logo"],
-                                          ),
-                                          (0.01 * width).addWSpace(),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                        (0.015 * height).addHSpace(),
+                        Row(
+                          children: [
+                            Container(
+                              height: 0.999 * height,
+                              width: 0.18 * width,
+                              padding: EdgeInsets.only(
+                                  bottom: 0.04 * height, left: 0.005 * width),
+                              child: RawScrollbar(
+                                controller: scrollController,
+                                thickness: 20,
+                                thumbVisibility: true,
+                                thumbColor: Colors.black,
+                                child: ListView.separated(
+                                    controller: scrollController,
+                                    itemBuilder: (context, index) {
+                                      return InkResponse(
+                                        onTap: () {},
+                                        onHover: (value) {
+                                          isHover = value;
+                                        },
+                                        hoverColor:
+                                            Colors.grey.withOpacity(0.4),
+                                        highlightShape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(
+                                            0.01 * height),
+                                        child: SizedBox(
+                                          height: 0.06 * height,
+                                          width: 0.17 * width,
+                                          child: Row(
                                             children: [
-                                              SizedBox(
-                                                width: 0.25 * width,
-                                                child: Text(
-                                                  "${allData[index]["title"]}",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 0.018 * width,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
+                                              (0.01 * width).addWSpace(),
+                                              Icon(allData2[index]["icon"]),
+                                              (0.01 * width).addWSpace(),
                                               Text(
-                                                "${allData[index]["name"]}",
+                                                "${allData2[index]["name"]}",
                                                 style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 0.015 * width,
+                                                  color: Colors.white,
+                                                  fontSize: 0.01 * width,
                                                 ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "${allData[index]["views"]}",
-                                                    style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 0.015 * width,
-                                                    ),
-                                                  ),
-                                                  (0.01 * width).addWSpace(),
-                                                  Icon(
-                                                    Icons.circle,
-                                                    color: Colors.grey,
-                                                    size: 0.008 * height,
-                                                  ),
-                                                  (0.01 * width).addWSpace(),
-                                                  Text(
-                                                    "${allData[index]["time"]}",
-                                                    style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 0.015 * width,
-                                                    ),
-                                                  ),
-                                                ],
                                               ),
                                             ],
                                           ),
-                                        ],
-                                      )
-                                    ],
+                                        ),
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return index == 2
+                                          ? Column(
+                                              children: [
+                                                Divider(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.4),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      left: 0.01 * width),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        "You",
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize:
+                                                              0.011 * width,
+                                                        ),
+                                                      ),
+                                                      (0.007 * width)
+                                                          .addWSpace(),
+                                                      Icon(
+                                                        Icons
+                                                            .arrow_forward_ios_rounded,
+                                                        size: 0.012 * width,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          : index == 6
+                                              ? Column(
+                                                  children: [
+                                                    Divider(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.4),
+                                                    ),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 0.01 * width,
+                                                          right: 0.125 * width),
+                                                      child: Text(
+                                                        "Explore",
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize:
+                                                              0.011 * width,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
+                                              : index == 17
+                                                  ? Column(
+                                                      children: [
+                                                        Divider(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.4),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 0.01 *
+                                                                      width,
+                                                                  right: 0.06 *
+                                                                      width),
+                                                          child: Text(
+                                                            "More from YouTube",
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize:
+                                                                  0.011 * width,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )
+                                                  : index == 20
+                                                      ? Divider(
+                                                          color: Colors.grey
+                                                              .withOpacity(0.4),
+                                                        )
+                                                      : index == 24
+                                                          ? Column(
+                                                              children: [
+                                                                Divider(
+                                                                  color: Colors
+                                                                      .grey
+                                                                      .withOpacity(
+                                                                          0.4),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsets.only(
+                                                                      left: 0.01 *
+                                                                          width,
+                                                                      right: 0.04 *
+                                                                          width),
+                                                                  child: Text(
+                                                                    "About Press Copyright Contact us Creators Advertise Developers TermsPrivacy Policy & SafetyHow YouTube worksTest new features",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          0.012 *
+                                                                              width,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            )
+                                                          : const SizedBox();
+                                    },
+                                    itemCount: allData2.length),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 0.99 * height,
+                              width: 0.8 * width,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 0.05 * height,
+                                    child: Row(
+                                      children: List.generate(
+                                        data.length,
+                                        (index) => InkResponse(
+                                          onTap: () {
+                                            setState(() {
+                                              select = index;
+                                            });
+                                          },
+                                          onHover: (value) {
+                                            setState(() {
+                                              isHover = value;
+                                            });
+                                          },
+                                          borderRadius: BorderRadius.circular(
+                                              0.01 * height),
+                                          highlightShape: BoxShape.rectangle,
+                                          hoverColor:
+                                              Colors.grey.withOpacity(0.1),
+                                          child: Container(
+                                            margin: EdgeInsets.symmetric(
+                                              horizontal: 0.005 * width,
+                                              vertical: 0,
+                                            ),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 0.02 * width,
+                                                vertical: 0.01 * height),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      0.015 * height),
+                                              color: select == index
+                                                  ? Colors.white
+                                                  : Colors.grey
+                                                      .withOpacity(0.2),
+                                            ),
+                                            child: Text(
+                                              "${data[index]}",
+                                              style: TextStyle(
+                                                color: select == index
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
+                                  (0.015 * height).addHSpace(),
+                                  Expanded(
+                                    child: GridView.builder(
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        childAspectRatio: 0.00135 * height,
+                                        crossAxisSpacing: 0.01 * width,
+                                      ),
+                                      itemCount: allData.length,
+                                      padding: EdgeInsets.zero,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: [
+                                            Container(
+                                              height: 0.3 * height,
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: allData[index]["image"],
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        0.01 * height),
+                                              ),
+                                            ),
+                                            (0.01 * height).addHSpace(),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 0.018 * width,
+                                                  backgroundColor:
+                                                      allData[index]["logo"],
+                                                ),
+                                                (0.01 * width).addWSpace(),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 0.17 * width,
+                                                      child: Text(
+                                                        "${allData[index]["title"]}",
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize:
+                                                              0.013 * width,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "${allData[index]["name"]}",
+                                                      style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 0.011 * width,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "${allData[index]["views"]}",
+                                                          style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize:
+                                                                0.011 * width,
+                                                          ),
+                                                        ),
+                                                        (0.01 * width)
+                                                            .addWSpace(),
+                                                        Icon(
+                                                          Icons.circle,
+                                                          color: Colors.grey,
+                                                          size: 0.008 * height,
+                                                        ),
+                                                        (0.01 * width)
+                                                            .addWSpace(),
+                                                        Text(
+                                                          "${allData[index]["time"]}",
+                                                          style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize:
+                                                                0.011 * width,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                const Spacer(),
+                                                InkResponse(
+                                                  onTap: () {},
+                                                  child: const Icon(
+                                                      Icons.more_vert),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
