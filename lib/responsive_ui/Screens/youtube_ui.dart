@@ -1014,38 +1014,42 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   bottom: 0.04 * height, left: 0.005 * width),
                               child: RawScrollbar(
                                 controller: scrollController,
-                                thickness: 20,
+                                thickness: 5,
                                 thumbVisibility: true,
-                                thumbColor: Colors.black,
+                                thumbColor: Colors.grey,
                                 child: ListView.separated(
                                     controller: scrollController,
                                     itemBuilder: (context, index) {
-                                      return InkResponse(
-                                        onTap: () {},
-                                        onHover: (value) {
-                                          isHover = value;
-                                        },
-                                        hoverColor:
-                                            Colors.grey.withOpacity(0.4),
-                                        highlightShape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.circular(
-                                            0.01 * height),
-                                        child: SizedBox(
-                                          height: 0.06 * height,
-                                          width: 0.17 * width,
-                                          child: Row(
-                                            children: [
-                                              (0.01 * width).addWSpace(),
-                                              Icon(allData2[index]["icon"]),
-                                              (0.01 * width).addWSpace(),
-                                              Text(
-                                                "${allData2[index]["name"]}",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 0.01 * width,
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                            right: 0.01 * width),
+                                        child: InkResponse(
+                                          onTap: () {},
+                                          onHover: (value) {
+                                            isHover = value;
+                                          },
+                                          hoverColor:
+                                              Colors.grey.withOpacity(0.4),
+                                          highlightShape: BoxShape.rectangle,
+                                          borderRadius: BorderRadius.circular(
+                                              0.01 * height),
+                                          child: SizedBox(
+                                            height: 0.06 * height,
+                                            width: 0.17 * width,
+                                            child: Row(
+                                              children: [
+                                                (0.01 * width).addWSpace(),
+                                                Icon(allData2[index]["icon"]),
+                                                (0.01 * width).addWSpace(),
+                                                Text(
+                                                  "${allData2[index]["name"]}",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 0.01 * width,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );
