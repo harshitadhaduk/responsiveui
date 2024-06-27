@@ -519,7 +519,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                               ),
                               (0.04 * width).addWSpace(),
                               CircleAvatar(
-                                radius: 0.024 * width,
                                 backgroundColor: Colors.purple.shade300,
                                 child: const Text(
                                   "H",
@@ -872,8 +871,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                               (0.02 * width).addWSpace(),
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 0.007 * width,
-                                    vertical: 0.0028 * height),
+                                    horizontal: 0.01 * width,
+                                    vertical: 0.003 * height),
                                 decoration: BoxDecoration(
                                   color: Colors.red,
                                   borderRadius:
@@ -889,12 +888,12 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 "YouTube",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 0.018 * width,
+                                  fontSize: 0.02 * width,
                                 ),
                               ),
                               (0.1 * width).addWSpace(),
                               Container(
-                                height: 0.055 * height,
+                                height: 0.05 * height,
                                 width: 0.4 * width,
                                 decoration: BoxDecoration(
                                   color: Colors.grey.withOpacity(0.4),
