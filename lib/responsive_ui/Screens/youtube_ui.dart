@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_ui/responsive_ui/Screens/video_play_screen.dart';
 import 'package:responsive_ui/responsive_ui/general/sized_box.dart';
+import 'package:video_player/video_player.dart';
 
 class YoutubeUiScreen extends StatefulWidget {
   const YoutubeUiScreen({super.key});
@@ -28,75 +30,111 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
   List<Map<String, dynamic>> allData = [
     {
       "name": "Ripples Code",
-      "title": "Auto From Validation in Flutter || Getx",
+      "title": "Big Buck Bunny",
       "views": "28k views",
       "time": "3 years ago",
-      "image": Colors.grey,
-      "logo": Colors.green,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     },
     {
       "name": "Abc",
-      "title": "Validation in Flutter",
+      "title": "Elephant Dream",
       "views": "30k views",
       "time": "2 years ago",
-      "image": Colors.teal,
-      "logo": Colors.red,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     },
     {
       "name": "Xyz",
-      "title": "Validation in Flutter",
+      "title": "For Bigger Blazes",
       "views": "30k views",
       "time": "1 years ago",
-      "image": Colors.green,
-      "logo": Colors.yellow,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     },
     {
       "name": "Nijsef",
-      "title": "Validation in Flutter",
+      "title": "For Bigger Escape",
       "views": "1k views",
       "time": "4 years ago",
-      "image": Colors.pink,
-      "logo": Colors.teal,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     },
     {
       "name": "Abc",
-      "title": "Validation in Flutter",
+      "title": "For Bigger Fun",
       "views": "30k views",
       "time": "2 years ago",
-      "image": Colors.teal,
-      "logo": Colors.red,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     },
     {
       "name": "Abc",
-      "title": "Validation in Flutter",
+      "title": "For Bigger Joyrides",
       "views": "30k views",
       "time": "2 years ago",
-      "image": Colors.yellow.shade100,
-      "logo": Colors.green,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
     },
     {
       "name": "Abc",
-      "title": "Validation in Flutter",
+      "title": "For Bigger Meltdowns",
       "views": "30k views",
       "time": "2 years ago",
-      "image": Colors.pink.shade300,
-      "logo": Colors.green.shade300,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
     },
     {
       "name": "Abc",
-      "title": "Validation in Flutter",
+      "title": "Sintel",
       "views": "30k views",
       "time": "2 years ago",
-      "image": Colors.purple.shade100,
-      "logo": Colors.grey,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
     },
     {
       "name": "Abc",
-      "title": "Validation in Flutter",
+      "title": "Subaru Outback On Street And Dirt",
       "views": "30k views",
       "time": "2 years ago",
-      "image": Colors.red,
-      "logo": Colors.blue,
+      "image":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg",
+      "logo":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      "video":
+          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
     },
   ];
   List<Map<String, dynamic>> allData2 = [
@@ -128,13 +166,108 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     {"icon": Icons.abc, "name": ""},
   ];
   int selectFunction = 0;
+  int selectVideo = -1;
 
+  List<VideoPlayerController> videoData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    VideoPlayerController videoPlayerController0 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[0]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+    VideoPlayerController videoPlayerController1 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[1]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+    VideoPlayerController videoPlayerController2 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[2]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+    VideoPlayerController videoPlayerController3 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[3]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+    VideoPlayerController videoPlayerController4 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[4]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+    VideoPlayerController videoPlayerController5 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[5]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+    VideoPlayerController videoPlayerController6 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[6]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+    VideoPlayerController videoPlayerController7 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[7]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+    VideoPlayerController videoPlayerController8 =
+        VideoPlayerController.networkUrl(Uri.parse("${allData[8]["video"]}"))
+          ..initialize().then((_) {
+            setState(() {});
+          });
+
+    videoData.addAll([
+      videoPlayerController0,
+      videoPlayerController1,
+      videoPlayerController2,
+      videoPlayerController3,
+      videoPlayerController4,
+      videoPlayerController5,
+      videoPlayerController6,
+      videoPlayerController7,
+      videoPlayerController8,
+    ]);
+  }
+
+  @override
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
+      floatingActionButton: selectVideo == -1
+          ? const SizedBox()
+          : Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: 0.2 * height,
+                  width: 0.4 * width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: VideoPlayer(videoData[selectVideo]),
+                ),
+                InkResponse(
+                  onTap: () {
+                    setState(() {
+                      videoData[selectVideo].value.isPlaying
+                          ? videoData[selectVideo].pause()
+                          : videoData[selectVideo].play();
+                    });
+                  },
+                  child: Icon(
+                    videoData[selectVideo].value.isPlaying
+                        ? Icons.pause
+                        : Icons.play_arrow,
+                  ),
+                ),
+              ],
+            ),
       body: SafeArea(
         child: SingleChildScrollView(
           controller: scrollController,
@@ -299,87 +432,116 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                               child: ListView.builder(
                                 itemCount: allData.length,
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 0.015 * height,
-                                        horizontal: 0.02 * width),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 0.25 * height,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: allData[index]["image"],
-                                            borderRadius: BorderRadius.circular(
-                                                0.01 * height),
+                                  return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectVideo = index;
+                                      });
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                VideoPlayScreen(
+                                              video: allData[index]["video"],
+                                              // video: videoData[selectVideo],
+                                              // video: videoData,
+                                            ),
+                                          ));
+                                    },
+                                    borderRadius: BorderRadius.circular(10),
+                                    radius: 10,
+                                    child: Container(
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 0.015 * height,
+                                          horizontal: 0.02 * width),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 0.25 * height,
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      "${allData[index]["image"]}"),
+                                                  fit: BoxFit.cover),
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      0.01 * height),
+                                            ),
                                           ),
-                                        ),
-                                        (0.01 * height).addHSpace(),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CircleAvatar(
-                                              radius: 0.02 * height,
-                                              backgroundColor: allData[index]
-                                                  ["logo"],
-                                            ),
-                                            (0.02 * width).addWSpace(),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "${allData[index]["title"]}",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 0.04 * width,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${allData[index]["name"]}",
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 0.03 * width,
-                                                  ),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "${allData[index]["views"]}",
-                                                      style: TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 0.03 * width,
-                                                      ),
+                                          (0.01 * height).addHSpace(),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              CircleAvatar(
+                                                radius: 0.018 * width,
+                                                backgroundImage: NetworkImage(
+                                                    "${allData[index]["logo"]}"),
+                                              ),
+                                              (0.02 * width).addWSpace(),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "${allData[index]["title"]}",
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 0.04 * width,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
-                                                    (0.01 * width).addWSpace(),
-                                                    Icon(
-                                                      Icons.circle,
+                                                  ),
+                                                  Text(
+                                                    "${allData[index]["name"]}",
+                                                    style: TextStyle(
                                                       color: Colors.grey,
-                                                      size: 0.01 * height,
+                                                      fontSize: 0.03 * width,
                                                     ),
-                                                    (0.01 * width).addWSpace(),
-                                                    Text(
-                                                      "${allData[index]["time"]}",
-                                                      style: TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 0.03 * width,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "${allData[index]["views"]}",
+                                                        style: TextStyle(
+                                                          color: Colors.grey,
+                                                          fontSize:
+                                                              0.03 * width,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            const Spacer(),
-                                            InkResponse(
-                                              onTap: () {},
-                                              child:
-                                                  const Icon(Icons.more_vert),
-                                            ),
-                                          ],
-                                        )
-                                      ],
+                                                      (0.01 * width)
+                                                          .addWSpace(),
+                                                      Icon(
+                                                        Icons.circle,
+                                                        color: Colors.grey,
+                                                        size: 0.01 * height,
+                                                      ),
+                                                      (0.01 * width)
+                                                          .addWSpace(),
+                                                      Text(
+                                                        "${allData[index]["time"]}",
+                                                        style: TextStyle(
+                                                          color: Colors.grey,
+                                                          fontSize:
+                                                              0.03 * width,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              const Spacer(),
+                                              InkResponse(
+                                                onTap: () {},
+                                                child:
+                                                    const Icon(Icons.more_vert),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
@@ -608,14 +770,13 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   children: [
                                     Column(
                                       children: [
-                                        InkResponse(
+                                        InkWell(
                                           onTap: () {},
                                           onHover: (value) {
                                             setState(() {
                                               isHover = value;
                                             });
                                           },
-                                          highlightShape: BoxShape.rectangle,
                                           borderRadius: BorderRadius.circular(
                                               0.01 * height),
                                           hoverColor:
@@ -641,14 +802,13 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                             ),
                                           ),
                                         ),
-                                        InkResponse(
+                                        InkWell(
                                           onTap: () {},
                                           onHover: (value) {
                                             setState(() {
                                               isHover = value;
                                             });
                                           },
-                                          highlightShape: BoxShape.rectangle,
                                           borderRadius: BorderRadius.circular(
                                               0.01 * height),
                                           hoverColor:
@@ -673,14 +833,13 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                             ),
                                           ),
                                         ),
-                                        InkResponse(
+                                        InkWell(
                                           onTap: () {},
                                           onHover: (value) {
                                             setState(() {
                                               isHover = value;
                                             });
                                           },
-                                          highlightShape: BoxShape.rectangle,
                                           borderRadius: BorderRadius.circular(
                                               0.01 * height),
                                           hoverColor:
@@ -706,14 +865,13 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                             ),
                                           ),
                                         ),
-                                        InkResponse(
+                                        InkWell(
                                           onTap: () {},
                                           onHover: (value) {
                                             setState(() {
                                               isHover = value;
                                             });
                                           },
-                                          highlightShape: BoxShape.rectangle,
                                           borderRadius: BorderRadius.circular(
                                               0.01 * height),
                                           hoverColor:
@@ -815,124 +973,147 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                               ),
                                               itemCount: allData.length,
                                               itemBuilder: (context, index) {
-                                                return Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 0.02 * width),
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        height: 0.25 * height,
-                                                        width: double.infinity,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: allData[index]
-                                                              ["image"],
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(0.01 *
-                                                                      height),
-                                                        ),
-                                                      ),
-                                                      (0.01 * height)
-                                                          .addHSpace(),
-                                                      Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          CircleAvatar(
-                                                            radius:
-                                                                0.02 * width,
-                                                            backgroundColor:
+                                                return InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      selectVideo = index;
+                                                    });
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              VideoPlayScreen(
+                                                            video:
                                                                 allData[index]
-                                                                    ["logo"],
+                                                                    ["video"],
                                                           ),
-                                                          (0.02 * width)
-                                                              .addWSpace(),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 0.28 *
-                                                                    width,
-                                                                child: Text(
-                                                                  "${allData[index]["title"]}",
+                                                        ));
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal:
+                                                                0.02 * width),
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          height: 0.25 * height,
+                                                          width:
+                                                              double.infinity,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image: DecorationImage(
+                                                                image: NetworkImage(
+                                                                    "${allData[index]["image"]}"),
+                                                                fit: BoxFit
+                                                                    .cover),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(0.01 *
+                                                                        height),
+                                                          ),
+                                                        ),
+                                                        (0.01 * height)
+                                                            .addHSpace(),
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            CircleAvatar(
+                                                              radius:
+                                                                  0.018 * width,
+                                                              backgroundImage:
+                                                                  NetworkImage(
+                                                                      "${allData[index]["logo"]}"),
+                                                            ),
+                                                            (0.02 * width)
+                                                                .addWSpace(),
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: 0.28 *
+                                                                      width,
+                                                                  child: Text(
+                                                                    "${allData[index]["title"]}",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          0.02 *
+                                                                              width,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  "${allData[index]["name"]}",
                                                                   style:
                                                                       TextStyle(
                                                                     color: Colors
-                                                                        .white,
+                                                                        .grey,
                                                                     fontSize:
                                                                         0.02 *
                                                                             width,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
                                                                   ),
                                                                 ),
-                                                              ),
-                                                              Text(
-                                                                "${allData[index]["name"]}",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  fontSize:
-                                                                      0.02 *
-                                                                          width,
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      "${allData[index]["views"]}",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        fontSize:
+                                                                            0.02 *
+                                                                                width,
+                                                                      ),
+                                                                    ),
+                                                                    (0.01 * width)
+                                                                        .addWSpace(),
+                                                                    Icon(
+                                                                      Icons
+                                                                          .circle,
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      size: 0.008 *
+                                                                          height,
+                                                                    ),
+                                                                    (0.01 * width)
+                                                                        .addWSpace(),
+                                                                    Text(
+                                                                      "${allData[index]["time"]}",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        fontSize:
+                                                                            0.02 *
+                                                                                width,
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  Text(
-                                                                    "${allData[index]["views"]}",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      fontSize:
-                                                                          0.02 *
-                                                                              width,
-                                                                    ),
-                                                                  ),
-                                                                  (0.01 * width)
-                                                                      .addWSpace(),
-                                                                  Icon(
-                                                                    Icons
-                                                                        .circle,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    size: 0.008 *
-                                                                        height,
-                                                                  ),
-                                                                  (0.01 * width)
-                                                                      .addWSpace(),
-                                                                  Text(
-                                                                    "${allData[index]["time"]}",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      fontSize:
-                                                                          0.02 *
-                                                                              width,
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          const Spacer(),
-                                                          InkResponse(
-                                                            onTap: () {},
-                                                            child: const Icon(
-                                                              Icons.more_vert,
+                                                              ],
                                                             ),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
+                                                            const Spacer(),
+                                                            InkResponse(
+                                                              onTap: () {},
+                                                              child: const Icon(
+                                                                Icons.more_vert,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 );
                                               },
@@ -1157,7 +1338,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     bottom: 0.04 * height,
                                     left: 0.005 * width,
                                   ),
-                                  child: InkResponse(
+                                  child: InkWell(
                                     onTap: () {},
                                     onHover: (value) {
                                       setState(() {
@@ -1426,105 +1607,129 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           itemCount: allData.length,
                                           padding: EdgeInsets.zero,
                                           itemBuilder: (context, index) {
-                                            return Column(
-                                              children: [
-                                                Container(
-                                                  height: 0.3 * height,
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(
-                                                    color: allData[index]
-                                                        ["image"],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.01 * height),
-                                                  ),
-                                                ),
-                                                (0.01 * height).addHSpace(),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    CircleAvatar(
-                                                      radius: 0.018 * width,
-                                                      backgroundColor:
-                                                          allData[index]
-                                                              ["logo"],
+                                            return InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  selectVideo = index;
+                                                });
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          VideoPlayScreen(
+                                                        video: allData[index]
+                                                            ["video"],
+                                                      ),
+                                                    ));
+                                              },
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    height: 0.3 * height,
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                              "${allData[index]["image"]}"),
+                                                          fit: BoxFit.cover),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              0.01 * height),
                                                     ),
-                                                    (0.01 * width).addWSpace(),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 0.17 * width,
-                                                          child: Text(
-                                                            "${allData[index]["title"]}",
+                                                  ),
+                                                  (0.01 * height).addHSpace(),
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      CircleAvatar(
+                                                        radius: 0.018 * width,
+                                                        backgroundImage:
+                                                            NetworkImage(
+                                                                "${allData[index]["logo"]}"),
+                                                      ),
+                                                      (0.01 * width)
+                                                          .addWSpace(),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 0.17 * width,
+                                                            child: Text(
+                                                              "${allData[index]["title"]}",
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize:
+                                                                    0.013 *
+                                                                        width,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            "${allData[index]["name"]}",
                                                             style: TextStyle(
                                                               color:
-                                                                  Colors.white,
-                                                              fontSize:
-                                                                  0.013 * width,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "${allData[index]["name"]}",
-                                                          style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize:
-                                                                0.011 * width,
-                                                          ),
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              "${allData[index]["views"]}",
-                                                              style: TextStyle(
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontSize:
-                                                                    0.011 *
-                                                                        width,
-                                                              ),
-                                                            ),
-                                                            (0.01 * width)
-                                                                .addWSpace(),
-                                                            Icon(
-                                                              Icons.circle,
-                                                              color:
                                                                   Colors.grey,
-                                                              size: 0.008 *
-                                                                  height,
+                                                              fontSize:
+                                                                  0.011 * width,
                                                             ),
-                                                            (0.01 * width)
-                                                                .addWSpace(),
-                                                            Text(
-                                                              "${allData[index]["time"]}",
-                                                              style: TextStyle(
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                "${allData[index]["views"]}",
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize:
+                                                                      0.011 *
+                                                                          width,
+                                                                ),
+                                                              ),
+                                                              (0.01 * width)
+                                                                  .addWSpace(),
+                                                              Icon(
+                                                                Icons.circle,
                                                                 color:
                                                                     Colors.grey,
-                                                                fontSize:
-                                                                    0.011 *
-                                                                        width,
+                                                                size: 0.008 *
+                                                                    height,
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const Spacer(),
-                                                    InkResponse(
-                                                      onTap: () {},
-                                                      child: const Icon(
-                                                          Icons.more_vert),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                              (0.01 * width)
+                                                                  .addWSpace(),
+                                                              Text(
+                                                                "${allData[index]["time"]}",
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize:
+                                                                      0.011 *
+                                                                          width,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const Spacer(),
+                                                      InkResponse(
+                                                        onTap: () {},
+                                                        child: const Icon(
+                                                            Icons.more_vert),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             );
                                           },
                                         ),
