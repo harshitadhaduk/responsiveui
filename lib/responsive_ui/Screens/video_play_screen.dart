@@ -1,9 +1,9 @@
 // import 'package:flutter/material.dart';
-//
 // import 'package:video_player/video_player.dart';
 //
 // class VideoPlayScreen extends StatefulWidget {
 //   final VideoPlayerController video;
+//
 //   const VideoPlayScreen({super.key, required this.video});
 //
 //   @override
@@ -26,10 +26,7 @@
 //                     aspectRatio: widget.video.value.aspectRatio,
 //                     child: VideoPlayer(widget.video),
 //                   )
-//                 : const Text(
-//                     "Something went wrong",
-//                     style: TextStyle(color: Colors.black),
-//                   ),
+//                 : Container(),
 //             InkResponse(
 //               onTap: () {
 //                 setState(() {
@@ -50,7 +47,6 @@
 // }
 
 import 'package:flutter/material.dart';
-
 import 'package:video_player/video_player.dart';
 
 class VideoPlayScreen extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:responsive_ui/responsive_ui/Screens/video_play_screen.dart';
 import 'package:responsive_ui/responsive_ui/general/sized_box.dart';
@@ -250,7 +251,12 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: VideoPlayer(videoData[selectVideo]),
+                  child: InkResponse(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: VideoPlayer(videoData[selectVideo]),
+                  ),
                 ),
                 InkResponse(
                   onTap: () {
@@ -268,911 +274,325 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                 ),
               ],
             ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          controller: scrollController,
-          physics: const NeverScrollableScrollPhysics(),
-          child: width <= 600
-              ? Stack(
-                  children: [
-                    RawScrollbar(
-                      controller: scrollController,
-                      thumbVisibility: true,
-                      thickness: 0.016 * width,
-                      thumbColor: Colors.grey,
-                      padding: EdgeInsets.symmetric(vertical: 0.025 * height),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 0.04 * width),
-                        child: Column(
+      body: width <= 600
+          ? Stack(
+              children: [
+                RawScrollbar(
+                  controller: scrollController,
+                  thumbVisibility: true,
+                  thickness: 0.016 * width,
+                  thumbColor: Colors.grey,
+                  padding: EdgeInsets.symmetric(vertical: 0.025 * height),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 0.04 * width),
+                    child: Column(
+                      children: [
+                        (0.015 * height).addHSpace(),
+                        Row(
                           children: [
-                            (0.015 * height).addHSpace(),
-                            Row(
-                              children: [
-                                InkResponse(
-                                  onTap: () {},
-                                  onHover: (value) {
-                                    setState(() {
-                                      isHover = value;
-                                    });
-                                  },
-                                  hoverColor: Colors.grey.withOpacity(0.4),
-                                  child: const Icon(Icons.menu),
-                                ),
-                                (0.03 * width).addWSpace(),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 0.015 * width,
-                                      vertical: 0.003 * height),
-                                  decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius:
-                                        BorderRadius.circular(0.01 * height),
-                                  ),
-                                  child: const Icon(
-                                    Icons.play_arrow,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                (0.01 * width).addWSpace(),
-                                Text(
-                                  "YouTube",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 0.045 * width,
-                                  ),
-                                ),
-                                const Spacer(),
-                                InkResponse(
-                                  onTap: () {},
-                                  onHover: (value) {
-                                    setState(() {
-                                      isHover = value;
-                                    });
-                                  },
-                                  hoverColor: Colors.grey.withOpacity(0.4),
-                                  child: const Icon(Icons.search_sharp),
-                                ),
-                                (0.02 * width).addWSpace(),
-                                InkResponse(
-                                    onTap: () {},
-                                    onHover: (value) {
-                                      setState(() {
-                                        isHover = value;
-                                      });
-                                    },
-                                    hoverColor: Colors.grey.withOpacity(0.4),
-                                    child: const Icon(Icons.mic)),
-                                (0.02 * width).addWSpace(),
-                                InkResponse(
-                                  onTap: () {},
-                                  onHover: (value) {
-                                    setState(() {
-                                      isHover = value;
-                                    });
-                                  },
-                                  hoverColor: Colors.grey.withOpacity(0.4),
-                                  child: const Icon(Icons.video_call_outlined),
-                                ),
-                                (0.02 * width).addWSpace(),
-                                InkResponse(
-                                  onTap: () {},
-                                  onHover: (value) {
-                                    setState(() {
-                                      isHover = value;
-                                    });
-                                  },
-                                  hoverColor: Colors.grey.withOpacity(0.4),
-                                  child: const Icon(Icons.notifications_active),
-                                ),
-                                (0.02 * width).addWSpace(),
-                                CircleAvatar(
-                                  radius: 0.023 * height,
-                                  backgroundColor: Colors.purple.shade300,
-                                  child: const Text(
-                                    "H",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            InkResponse(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isHover = value;
+                                });
+                              },
+                              hoverColor: Colors.grey.withOpacity(0.4),
+                              child: const Icon(Icons.menu),
                             ),
-                            (0.015 * height).addHSpace(),
-                            SizedBox(
-                              height: 0.05 * height,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemCount: data.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        select = index;
-                                      });
-                                    },
-                                    onHover: (value) {
-                                      setState(() {
-                                        isHover = value;
-                                      });
-                                    },
-                                    borderRadius:
-                                        BorderRadius.circular(0.01 * height),
-                                    hoverColor: Colors.grey.withOpacity(0.1),
-                                    child: Container(
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 0.01 * width),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 0.05 * width,
-                                          vertical: 0.01 * height),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            0.015 * height),
-                                        color: select == index
-                                            ? Colors.white
-                                            : Colors.grey.withOpacity(0.2),
-                                      ),
-                                      child: Text(
-                                        "${data[index]}",
-                                        style: TextStyle(
-                                          color: select == index
-                                              ? Colors.black
-                                              : Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
+                            (0.03 * width).addWSpace(),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 0.015 * width,
+                                  vertical: 0.003 * height),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius:
+                                    BorderRadius.circular(0.01 * height),
+                              ),
+                              child: const Icon(
+                                Icons.play_arrow,
+                                color: Colors.white,
                               ),
                             ),
-                            (0.01 * height).addHSpace(),
-                            SizedBox(
-                              height: context.height,
-                              width: double.infinity,
-                              child: ListView.builder(
-                                itemCount: allData.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        selectVideo = index;
-                                      });
-
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                VideoPlayScreen(
-                                              video: allData[index]["video"],
-                                              // video: videoData[selectVideo],
-                                              // video: videoData,
-                                            ),
-                                          ));
-                                    },
-                                    borderRadius: BorderRadius.circular(10),
-                                    radius: 10,
-                                    child: Container(
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 0.015 * height,
-                                          horizontal: 0.02 * width),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 0.25 * height,
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      "${allData[index]["image"]}"),
-                                                  fit: BoxFit.cover),
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      0.01 * height),
-                                            ),
-                                          ),
-                                          (0.01 * height).addHSpace(),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 0.018 * width,
-                                                backgroundImage: NetworkImage(
-                                                    "${allData[index]["logo"]}"),
-                                              ),
-                                              (0.02 * width).addWSpace(),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "${allData[index]["title"]}",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 0.04 * width,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "${allData[index]["name"]}",
-                                                    style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 0.03 * width,
-                                                    ),
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        "${allData[index]["views"]}",
-                                                        style: TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize:
-                                                              0.03 * width,
-                                                        ),
-                                                      ),
-                                                      (0.01 * width)
-                                                          .addWSpace(),
-                                                      Icon(
-                                                        Icons.circle,
-                                                        color: Colors.grey,
-                                                        size: 0.01 * height,
-                                                      ),
-                                                      (0.01 * width)
-                                                          .addWSpace(),
-                                                      Text(
-                                                        "${allData[index]["time"]}",
-                                                        style: TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize:
-                                                              0.03 * width,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              const Spacer(),
-                                              InkResponse(
-                                                onTap: () {},
-                                                child:
-                                                    const Icon(Icons.more_vert),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
+                            (0.01 * width).addWSpace(),
+                            Text(
+                              "YouTube",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 0.045 * width,
+                              ),
+                            ),
+                            const Spacer(),
+                            InkResponse(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isHover = value;
+                                });
+                              },
+                              hoverColor: Colors.grey.withOpacity(0.4),
+                              child: const Icon(Icons.search_sharp),
+                            ),
+                            (0.02 * width).addWSpace(),
+                            InkResponse(
+                                onTap: () {},
+                                onHover: (value) {
+                                  setState(() {
+                                    isHover = value;
+                                  });
                                 },
+                                hoverColor: Colors.grey.withOpacity(0.4),
+                                child: const Icon(Icons.mic)),
+                            (0.02 * width).addWSpace(),
+                            InkResponse(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isHover = value;
+                                });
+                              },
+                              hoverColor: Colors.grey.withOpacity(0.4),
+                              child: const Icon(Icons.video_call_outlined),
+                            ),
+                            (0.02 * width).addWSpace(),
+                            InkResponse(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isHover = value;
+                                });
+                              },
+                              hoverColor: Colors.grey.withOpacity(0.4),
+                              child: const Icon(Icons.notifications_active),
+                            ),
+                            (0.02 * width).addWSpace(),
+                            CircleAvatar(
+                              radius: 0.023 * height,
+                              backgroundColor: Colors.purple.shade300,
+                              child: const Text(
+                                "H",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 0.97 * width,
-                      right: 0.0 * width,
-                      child: InkResponse(
-                        onTap: () {
-                          setState(() {
-                            scrollController
-                                .jumpTo(scrollController.offset - 70);
-                          });
-                        },
-                        child: Icon(
-                          Icons.arrow_drop_up,
-                          size: 0.04 * width,
+                        (0.015 * height).addHSpace(),
+                        SizedBox(
+                          height: 0.05 * height,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: data.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    select = index;
+                                  });
+                                },
+                                onHover: (value) {
+                                  setState(() {
+                                    isHover = value;
+                                  });
+                                },
+                                borderRadius:
+                                    BorderRadius.circular(0.01 * height),
+                                hoverColor: Colors.grey.withOpacity(0.1),
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 0.01 * width),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.05 * width,
+                                      vertical: 0.01 * height),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(0.015 * height),
+                                    color: select == index
+                                        ? Colors.white
+                                        : Colors.grey.withOpacity(0.2),
+                                  ),
+                                  child: Text(
+                                    "${data[index]}",
+                                    style: TextStyle(
+                                      color: select == index
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 0.85 * height,
-                      bottom: 0,
-                      left: 0.97 * width,
-                      right: 0.0 * width,
-                      child: InkResponse(
-                        onTap: () {
-                          setState(() {
-                            scrollController
-                                .jumpTo(scrollController.offset + 70);
-                          });
-                        },
-                        child: Icon(
-                          Icons.arrow_drop_down,
-                          size: 0.038 * width,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              : width > 600 && width <= 1080
-                  ? Stack(
-                      children: [
-                        RawScrollbar(
-                          controller: scrollController,
-                          thumbColor: Colors.grey,
-                          thickness: 0.016 * width,
-                          padding: EdgeInsets.only(
-                              top: 0.028 * height, bottom: 0.02 * height),
-                          child: Column(
-                            children: [
-                              (0.01 * height).addHSpace(),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 0.03 * width),
-                                child: Row(
-                                  children: [
-                                    InkResponse(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        setState(() {
-                                          isHover = value;
-                                        });
-                                      },
-                                      hoverColor: Colors.grey.withOpacity(0.4),
-                                      child: const Icon(Icons.menu),
-                                    ),
-                                    (0.02 * width).addWSpace(),
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 0.015 * width,
-                                          vertical: 0.003 * height),
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(
-                                            0.01 * height),
-                                      ),
-                                      child: const Icon(
-                                        Icons.play_arrow,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    (0.01 * width).addWSpace(),
-                                    Text(
-                                      "YouTube",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 0.023 * width,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Container(
-                                      height: 0.05 * height,
-                                      width: 0.4 * width,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.withOpacity(0.4),
-                                        borderRadius: BorderRadius.circular(
-                                            0.04 * height),
-                                        border: Border.all(
-                                          color: Colors.grey.withOpacity(0.4),
+                        (0.01 * height).addHSpace(),
+                        Expanded(
+                          child: ListView.builder(
+                            controller: scrollController,
+                            itemCount: allData.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    selectVideo = index;
+                                  });
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => VideoPlayScreen(
+                                          video: allData[index]["video"],
+                                          // video: videoData[index],
+                                        ),
+                                      ));
+                                },
+                                borderRadius: BorderRadius.circular(10),
+                                radius: 10,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 0.015 * height,
+                                      horizontal: 0.02 * width),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 0.25 * height,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  "${allData[index]["image"]}"),
+                                              fit: BoxFit.cover),
+                                          borderRadius: BorderRadius.circular(
+                                              0.01 * height),
                                         ),
                                       ),
-                                      child: Row(
+                                      (0.01 * height).addHSpace(),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          TextField(
-                                            style: TextStyle(
-                                              color:
-                                                  Colors.grey.withOpacity(0.4),
-                                            ),
-                                            decoration: InputDecoration(
-                                              constraints:
-                                                  BoxConstraints.expand(
-                                                height: 0.05 * height,
-                                                width: 0.32 * width,
-                                              ),
-                                              hintText: "Search",
-                                              filled: true,
-                                              fillColor: Colors.black,
-                                              hintStyle: TextStyle(
-                                                color: Colors.grey
-                                                    .withOpacity(0.4),
-                                              ),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                horizontal: 0.013 * width,
-                                                vertical: 0.017 * height,
-                                              ),
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.horizontal(
-                                                  left: Radius.circular(
-                                                      0.03 * height),
-                                                ),
-                                                borderSide: BorderSide(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.4),
-                                                ),
-                                              ),
-                                            ),
+                                          CircleAvatar(
+                                            radius: 0.018 * width,
+                                            backgroundImage: NetworkImage(
+                                                "${allData[index]["logo"]}"),
                                           ),
-                                          RotatedBox(
-                                            quarterTurns: 1,
-                                            child: Divider(
-                                              height: 0,
-                                              color:
-                                                  Colors.grey.withOpacity(0.4),
-                                            ),
+                                          (0.02 * width).addWSpace(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${allData[index]["title"]}",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                "${allData[index]["name"]}",
+                                                style: const TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "${allData[index]["views"]}",
+                                                    style: const TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  (0.01 * width).addWSpace(),
+                                                  Icon(
+                                                    Icons.circle,
+                                                    color: Colors.grey,
+                                                    size: 0.01 * height,
+                                                  ),
+                                                  (0.01 * width).addWSpace(),
+                                                  Text(
+                                                    "${allData[index]["time"]}",
+                                                    style: const TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
                                           const Spacer(),
                                           InkResponse(
                                             onTap: () {},
-                                            child:
-                                                const Icon(Icons.search_sharp),
-                                          ),
-                                          const Spacer(),
-                                        ],
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    InkResponse(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        setState(() {
-                                          isHover = value;
-                                        });
-                                      },
-                                      hoverColor: Colors.grey.withOpacity(0.4),
-                                      child: CircleAvatar(
-                                        radius: 0.03 * height,
-                                        backgroundColor:
-                                            Colors.grey.withOpacity(0.3),
-                                        child: const Icon(
-                                          Icons.mic,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    InkResponse(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        setState(() {
-                                          isHover = value;
-                                        });
-                                      },
-                                      hoverColor: Colors.grey.withOpacity(0.4),
-                                      child:
-                                          const Icon(Icons.video_call_outlined),
-                                    ),
-                                    (0.04 * width).addWSpace(),
-                                    InkResponse(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        setState(() {
-                                          isHover = value;
-                                        });
-                                      },
-                                      hoverColor: Colors.grey.withOpacity(0.4),
-                                      child: const Icon(
-                                          Icons.notifications_active),
-                                    ),
-                                    (0.04 * width).addWSpace(),
-                                    CircleAvatar(
-                                      backgroundColor: Colors.purple.shade300,
-                                      child: const Text(
-                                        "H",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              (0.01 * height).addHSpace(),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 0.005 * width),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {},
-                                          onHover: (value) {
-                                            setState(() {
-                                              isHover = value;
-                                            });
-                                          },
-                                          borderRadius: BorderRadius.circular(
-                                              0.01 * height),
-                                          hoverColor:
-                                              Colors.grey.withOpacity(0.4),
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 0.013 * width,
-                                                vertical: 0.015 * height),
-                                            child: Column(
-                                              children: [
-                                                Icon(
-                                                  Icons.home,
-                                                  size: 0.04 * width,
-                                                ),
-                                                Text(
-                                                  "Home",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 0.015 * width,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {},
-                                          onHover: (value) {
-                                            setState(() {
-                                              isHover = value;
-                                            });
-                                          },
-                                          borderRadius: BorderRadius.circular(
-                                              0.01 * height),
-                                          hoverColor:
-                                              Colors.grey.withOpacity(0.4),
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 0.013 * width,
-                                                vertical: 0.015 * height),
-                                            child: Column(
-                                              children: [
-                                                Icon(
-                                                  Icons.add,
-                                                  size: 0.04 * width,
-                                                ),
-                                                Text(
-                                                  "Shorts",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 0.015 * width),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {},
-                                          onHover: (value) {
-                                            setState(() {
-                                              isHover = value;
-                                            });
-                                          },
-                                          borderRadius: BorderRadius.circular(
-                                              0.01 * height),
-                                          hoverColor:
-                                              Colors.grey.withOpacity(0.4),
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 0.013 * width,
-                                                vertical: 0.015 * height),
-                                            child: Column(
-                                              children: [
-                                                Icon(
-                                                  Icons.subscriptions,
-                                                  size: 0.04 * width,
-                                                ),
-                                                Text(
-                                                  "Subscription",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 0.015 * width,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          onTap: () {},
-                                          onHover: (value) {
-                                            setState(() {
-                                              isHover = value;
-                                            });
-                                          },
-                                          borderRadius: BorderRadius.circular(
-                                              0.01 * height),
-                                          hoverColor:
-                                              Colors.grey.withOpacity(0.4),
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 0.013 * width,
-                                                vertical: 0.015 * height),
-                                            child: Column(
-                                              children: [
-                                                Icon(
-                                                  Icons.person,
-                                                  size: 0.04 * width,
-                                                ),
-                                                Text(
-                                                  "You",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 0.015 * width),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: 0.86 * width,
-                                      child: Column(
-                                        children: [
-                                          (0.01 * height).addHSpace(),
-                                          SizedBox(
-                                            height: 0.05 * height,
-                                            child: ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              shrinkWrap: true,
-                                              itemCount: data.length,
-                                              itemBuilder: (context, index) {
-                                                return InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      select = index;
-                                                    });
-                                                  },
-                                                  onHover: (value) {
-                                                    setState(() {
-                                                      isHover = value;
-                                                    });
-                                                  },
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.01 * height),
-                                                  hoverColor: Colors.grey
-                                                      .withOpacity(0.1),
-                                                  child: Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal:
-                                                                0.01 * width),
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal:
-                                                                0.02 * width,
-                                                            vertical:
-                                                                0.01 * height),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              0.015 * height),
-                                                      color: select == index
-                                                          ? Colors.white
-                                                          : Colors.grey
-                                                              .withOpacity(0.2),
-                                                    ),
-                                                    child: Text(
-                                                      "${data[index]}",
-                                                      style: TextStyle(
-                                                        color: select == index
-                                                            ? Colors.black
-                                                            : Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                          (0.01 * height).addHSpace(),
-                                          SizedBox(
-                                            height: context.height,
-                                            width: double.infinity,
-                                            child: GridView.builder(
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                childAspectRatio:
-                                                    0.00135 * width,
-                                                mainAxisSpacing: 0.02 * height,
-                                              ),
-                                              itemCount: allData.length,
-                                              itemBuilder: (context, index) {
-                                                return InkWell(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      selectVideo = index;
-                                                    });
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              VideoPlayScreen(
-                                                            video:
-                                                                allData[index]
-                                                                    ["video"],
-                                                          ),
-                                                        ));
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal:
-                                                                0.02 * width),
-                                                    child: Column(
-                                                      children: [
-                                                        Container(
-                                                          height: 0.25 * height,
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            image: DecorationImage(
-                                                                image: NetworkImage(
-                                                                    "${allData[index]["image"]}"),
-                                                                fit: BoxFit
-                                                                    .cover),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(0.01 *
-                                                                        height),
-                                                          ),
-                                                        ),
-                                                        (0.01 * height)
-                                                            .addHSpace(),
-                                                        Row(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            CircleAvatar(
-                                                              radius:
-                                                                  0.018 * width,
-                                                              backgroundImage:
-                                                                  NetworkImage(
-                                                                      "${allData[index]["logo"]}"),
-                                                            ),
-                                                            (0.02 * width)
-                                                                .addWSpace(),
-                                                            Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                SizedBox(
-                                                                  width: 0.28 *
-                                                                      width,
-                                                                  child: Text(
-                                                                    "${allData[index]["title"]}",
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          0.02 *
-                                                                              width,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                  "${allData[index]["name"]}",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    fontSize:
-                                                                        0.02 *
-                                                                            width,
-                                                                  ),
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                      "${allData[index]["views"]}",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .grey,
-                                                                        fontSize:
-                                                                            0.02 *
-                                                                                width,
-                                                                      ),
-                                                                    ),
-                                                                    (0.01 * width)
-                                                                        .addWSpace(),
-                                                                    Icon(
-                                                                      Icons
-                                                                          .circle,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      size: 0.008 *
-                                                                          height,
-                                                                    ),
-                                                                    (0.01 * width)
-                                                                        .addWSpace(),
-                                                                    Text(
-                                                                      "${allData[index]["time"]}",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .grey,
-                                                                        fontSize:
-                                                                            0.02 *
-                                                                                width,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            const Spacer(),
-                                                            InkResponse(
-                                                              onTap: () {},
-                                                              child: const Icon(
-                                                                Icons.more_vert,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
+                                            child: const Icon(Icons.more_vert),
                                           ),
                                         ],
-                                      ),
-                                    ),
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 0.975 * width,
-                          right: 0.0 * width,
-                          child: InkResponse(
-                            onTap: () {
-                              setState(() {
-                                scrollController
-                                    .jumpTo(scrollController.offset - 70);
-                              });
+                              );
                             },
-                            child: Icon(
-                              Icons.arrow_drop_up,
-                              size: 0.033 * width,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 0.83 * height,
-                          bottom: 0,
-                          left: 0.975 * width,
-                          right: 0.0 * width,
-                          child: InkResponse(
-                            onTap: () {
-                              setState(() {
-                                scrollController
-                                    .jumpTo(scrollController.offset + 70);
-                              });
-                            },
-                            child: Icon(
-                              Icons.arrow_drop_down,
-                              size: 0.033 * width,
-                            ),
                           ),
                         ),
                       ],
-                    )
-                  : Stack(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0.97 * width,
+                  right: 0.0 * width,
+                  child: InkResponse(
+                    onTap: () {
+                      setState(() {
+                        scrollController.jumpTo(scrollController.offset - 70);
+                      });
+                    },
+                    child: Icon(
+                      Icons.arrow_drop_up,
+                      size: 0.04 * width,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: 0.97 * width,
+                  right: 0.0 * width,
+                  child: InkResponse(
+                    onTap: () {
+                      setState(() {
+                        scrollController.jumpTo(scrollController.offset + 70);
+                      });
+                    },
+                    child: Icon(
+                      Icons.arrow_drop_down,
+                      size: 0.038 * width,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : width > 600 && width <= 1080
+              ? Stack(
+                  children: [
+                    SingleChildScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      child: RawScrollbar(
+                        controller: scrollController,
+                        thumbVisibility: true,
+                        thickness: 0.016 * width,
+                        thumbColor: Colors.grey,
+                        padding: EdgeInsets.symmetric(vertical: 0.025 * height),
+                        child: Column(
                           children: [
-                            (0.015 * height).addHSpace(),
+                            (0.01 * height).addHSpace(),
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 0.02 * width),
+                                  horizontal: 0.015 * width),
                               child: Row(
                                 children: [
                                   InkResponse(
@@ -1188,7 +608,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   (0.02 * width).addWSpace(),
                                   Container(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 0.01 * width,
+                                        horizontal: 0.015 * width,
                                         vertical: 0.003 * height),
                                     decoration: BoxDecoration(
                                       color: Colors.red,
@@ -1201,14 +621,14 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     ),
                                   ),
                                   (0.01 * width).addWSpace(),
-                                  Text(
+                                  const Text(
                                     "YouTube",
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 0.02 * width,
+                                      fontSize: 20,
                                     ),
                                   ),
-                                  (0.1 * width).addWSpace(),
+                                  const Spacer(),
                                   Container(
                                     height: 0.05 * height,
                                     width: 0.4 * width,
@@ -1229,7 +649,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           decoration: InputDecoration(
                                             constraints: BoxConstraints.expand(
                                               height: 0.05 * height,
-                                              width: 0.35 * width,
+                                              width: 0.32 * width,
                                             ),
                                             hintText: "Search",
                                             filled: true,
@@ -1272,7 +692,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       ],
                                     ),
                                   ),
-                                  (0.02 * width).addWSpace(),
+                                  const Spacer(),
                                   InkResponse(
                                     onTap: () {},
                                     onHover: (value) {
@@ -1303,7 +723,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     child:
                                         const Icon(Icons.video_call_outlined),
                                   ),
-                                  (0.02 * width).addWSpace(),
+                                  (0.04 * width).addWSpace(),
                                   InkResponse(
                                     onTap: () {},
                                     onHover: (value) {
@@ -1315,7 +735,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     child:
                                         const Icon(Icons.notifications_active),
                                   ),
-                                  (0.02 * width).addWSpace(),
+                                  (0.04 * width).addWSpace(),
                                   CircleAvatar(
                                     backgroundColor: Colors.purple.shade300,
                                     child: const Text(
@@ -1328,456 +748,973 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 ],
                               ),
                             ),
-                            (0.015 * height).addHSpace(),
-                            Row(
-                              children: [
-                                Container(
-                                  height: 0.999 * height,
-                                  width: 0.18 * width,
-                                  padding: EdgeInsets.only(
-                                    bottom: 0.04 * height,
-                                    left: 0.005 * width,
-                                  ),
-                                  child: InkWell(
-                                    onTap: () {},
-                                    onHover: (value) {
-                                      setState(() {
-                                        isHover = value;
-                                      });
-                                    },
-                                    child: RawScrollbar(
-                                      controller: scrollController,
-                                      thumbColor: Colors.grey,
-                                      thickness: 0.006 * width,
-                                      thumbVisibility: isHover ? true : false,
-                                      padding: EdgeInsets.only(
-                                          top: 0.01 * height,
-                                          bottom: 0.06 * height),
-                                      child: ListView.separated(
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: EdgeInsets.only(
-                                                right: 0.01 * width),
-                                            child: InkResponse(
-                                              onTap: () {
-                                                setState(() {
-                                                  selectFunction = index;
-                                                });
-                                              },
-                                              onHover: (value) {
-                                                isHover = value;
-                                              },
-                                              hoverColor:
-                                                  Colors.grey.withOpacity(0.4),
-                                              highlightShape:
-                                                  BoxShape.rectangle,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      0.007 * width),
-                                              child: Container(
-                                                height: 0.06 * height,
-                                                width: 0.15 * width,
-                                                decoration: BoxDecoration(
-                                                  color: selectFunction == index
-                                                      ? Colors.grey
-                                                          .withOpacity(0.4)
-                                                      : Colors.transparent,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.005 * width),
+                            (0.01 * height).addHSpace(),
+                            Padding(
+                              padding: EdgeInsets.only(left: 0.003 * width),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        onHover: (value) {
+                                          setState(() {
+                                            isHover = value;
+                                          });
+                                        },
+                                        borderRadius: BorderRadius.circular(
+                                            0.01 * height),
+                                        hoverColor:
+                                            Colors.grey.withOpacity(0.4),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 0.013 * width,
+                                              vertical: 0.015 * height),
+                                          child: Column(
+                                            children: [
+                                              Icon(
+                                                Icons.home,
+                                                size: 0.04 * width,
+                                              ),
+                                              const Text(
+                                                "Home",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
                                                 ),
-                                                child: Row(
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {},
+                                        onHover: (value) {
+                                          setState(() {
+                                            isHover = value;
+                                          });
+                                        },
+                                        borderRadius: BorderRadius.circular(
+                                            0.01 * height),
+                                        hoverColor:
+                                            Colors.grey.withOpacity(0.4),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 0.013 * width,
+                                              vertical: 0.015 * height),
+                                          child: Column(
+                                            children: [
+                                              Icon(
+                                                Icons.add,
+                                                size: 0.04 * width,
+                                              ),
+                                              const Text(
+                                                "Shorts",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {},
+                                        onHover: (value) {
+                                          setState(() {
+                                            isHover = value;
+                                          });
+                                        },
+                                        borderRadius: BorderRadius.circular(
+                                            0.01 * height),
+                                        hoverColor:
+                                            Colors.grey.withOpacity(0.4),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 0.013 * width,
+                                              vertical: 0.015 * height),
+                                          child: Column(
+                                            children: [
+                                              Icon(
+                                                Icons.subscriptions,
+                                                size: 0.04 * width,
+                                              ),
+                                              const Text(
+                                                "Subscription",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {},
+                                        onHover: (value) {
+                                          setState(() {
+                                            isHover = value;
+                                          });
+                                        },
+                                        borderRadius: BorderRadius.circular(
+                                            0.01 * height),
+                                        hoverColor:
+                                            Colors.grey.withOpacity(0.4),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 0.013 * width,
+                                              vertical: 0.015 * height),
+                                          child: Column(
+                                            children: [
+                                              Icon(
+                                                Icons.person,
+                                                size: 0.04 * width,
+                                              ),
+                                              const Text(
+                                                "You",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 0.83 * width,
+                                    child: Column(
+                                      children: [
+                                        (0.01 * height).addHSpace(),
+                                        SizedBox(
+                                          height: 0.05 * height,
+                                          child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            shrinkWrap: true,
+                                            itemCount: data.length,
+                                            itemBuilder: (context, index) {
+                                              return InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    select = index;
+                                                  });
+                                                },
+                                                onHover: (value) {
+                                                  setState(() {
+                                                    isHover = value;
+                                                  });
+                                                },
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        0.01 * height),
+                                                hoverColor: Colors.grey
+                                                    .withOpacity(0.1),
+                                                child: Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 0.01 * width),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 0.02 * width,
+                                                      vertical: 0.01 * height),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0.015 * height),
+                                                    color: select == index
+                                                        ? Colors.white
+                                                        : Colors.grey
+                                                            .withOpacity(0.2),
+                                                  ),
+                                                  child: Text(
+                                                    "${data[index]}",
+                                                    style: TextStyle(
+                                                      color: select == index
+                                                          ? Colors.black
+                                                          : Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        (0.01 * height).addHSpace(),
+                                        SizedBox(
+                                          height: context.height,
+                                          width: 0.85 * width,
+                                          child: GridView.builder(
+                                            controller: scrollController,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              childAspectRatio: 0.0014 * height,
+                                              crossAxisSpacing: 0.01 * width,
+                                            ),
+                                            itemCount: allData.length,
+                                            padding: EdgeInsets.zero,
+                                            itemBuilder: (context, index) {
+                                              return InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    selectVideo = index;
+                                                  });
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            VideoPlayScreen(
+                                                          video: allData[index]
+                                                              ["video"],
+                                                        ),
+                                                      ));
+                                                },
+                                                child: Column(
                                                   children: [
-                                                    (0.01 * width).addWSpace(),
-                                                    Icon(allData2[index]
-                                                        ["icon"]),
-                                                    (0.01 * width).addWSpace(),
-                                                    Text(
-                                                      "${allData2[index]["name"]}",
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 0.01 * width,
+                                                    Container(
+                                                      height: 0.23 * height,
+                                                      width: double.infinity,
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: NetworkImage(
+                                                                "${allData[index]["image"]}"),
+                                                            fit: BoxFit.cover),
                                                       ),
                                                     ),
+                                                    (0.01 * height).addHSpace(),
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        CircleAvatar(
+                                                          radius: 0.018 * width,
+                                                          backgroundImage:
+                                                              NetworkImage(
+                                                                  "${allData[index]["logo"]}"),
+                                                        ),
+                                                        (0.02 * width)
+                                                            .addWSpace(),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            SizedBox(
+                                                              width:
+                                                                  0.299 * width,
+                                                              child: Text(
+                                                                "${allData[index]["title"]}",
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              "${allData[index]["name"]}",
+                                                              style:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.grey,
+                                                                fontSize: 15.5,
+                                                              ),
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  "${allData[index]["views"]}",
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                                ),
+                                                                (0.01 * width)
+                                                                    .addWSpace(),
+                                                                Icon(
+                                                                  Icons.circle,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  size: 0.008 *
+                                                                      height,
+                                                                ),
+                                                                (0.01 * width)
+                                                                    .addWSpace(),
+                                                                Text(
+                                                                  "${allData[index]["time"]}",
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        const Spacer(),
+                                                        InkResponse(
+                                                          onTap: () {},
+                                                          child: const Icon(
+                                                            Icons.more_vert,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
                                                   ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 0.975 * width,
+                      right: 0.0 * width,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            scrollController
+                                .jumpTo(scrollController.offset - 70);
+                          });
+                        },
+                        child: Icon(
+                          Icons.arrow_drop_up,
+                          size: 0.033 * width,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0.975 * width,
+                      right: 0.0 * width,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            scrollController
+                                .jumpTo(scrollController.offset + 70);
+                          });
+                        },
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          size: 0.033 * width,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Stack(
+                  children: [
+                    SingleChildScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          (0.015 * height).addHSpace(),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 0.02 * width),
+                            child: Row(
+                              children: [
+                                InkResponse(
+                                  onTap: () {},
+                                  onHover: (value) {
+                                    setState(() {
+                                      isHover = value;
+                                    });
+                                  },
+                                  hoverColor: Colors.grey.withOpacity(0.4),
+                                  child: const Icon(Icons.menu),
+                                ),
+                                (0.02 * width).addWSpace(),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.01 * width,
+                                      vertical: 0.003 * height),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius:
+                                        BorderRadius.circular(0.01 * height),
+                                  ),
+                                  child: const Icon(
+                                    Icons.play_arrow,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                (0.01 * width).addWSpace(),
+                                Text(
+                                  "YouTube",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 0.02 * width,
+                                  ),
+                                ),
+                                (0.1 * width).addWSpace(),
+                                Container(
+                                  height: 0.05 * height,
+                                  width: 0.4 * width,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.withOpacity(0.4),
+                                    borderRadius:
+                                        BorderRadius.circular(0.04 * height),
+                                    border: Border.all(
+                                      color: Colors.grey.withOpacity(0.4),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      TextField(
+                                        style: TextStyle(
+                                          color: Colors.grey.withOpacity(0.4),
+                                        ),
+                                        decoration: InputDecoration(
+                                          constraints: BoxConstraints.expand(
+                                            height: 0.05 * height,
+                                            width: 0.35 * width,
+                                          ),
+                                          hintText: "Search",
+                                          filled: true,
+                                          fillColor: Colors.black,
+                                          hintStyle: TextStyle(
+                                            color: Colors.grey.withOpacity(0.4),
+                                          ),
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 0.013 * width,
+                                            vertical: 0.017 * height,
+                                          ),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.horizontal(
+                                              left: Radius.circular(
+                                                  0.03 * height),
+                                            ),
+                                            borderSide: BorderSide(
+                                              color:
+                                                  Colors.grey.withOpacity(0.4),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      RotatedBox(
+                                        quarterTurns: 1,
+                                        child: Divider(
+                                          height: 0,
+                                          color: Colors.grey.withOpacity(0.4),
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      InkResponse(
+                                        onTap: () {},
+                                        child: const Icon(Icons.search_sharp),
+                                      ),
+                                      const Spacer(),
+                                    ],
+                                  ),
+                                ),
+                                (0.02 * width).addWSpace(),
+                                InkResponse(
+                                  onTap: () {},
+                                  onHover: (value) {
+                                    setState(() {
+                                      isHover = value;
+                                    });
+                                  },
+                                  hoverColor: Colors.grey.withOpacity(0.4),
+                                  child: CircleAvatar(
+                                    radius: 0.03 * height,
+                                    backgroundColor:
+                                        Colors.grey.withOpacity(0.3),
+                                    child: const Icon(
+                                      Icons.mic,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                const Spacer(),
+                                InkResponse(
+                                  onTap: () {},
+                                  onHover: (value) {
+                                    setState(() {
+                                      isHover = value;
+                                    });
+                                  },
+                                  hoverColor: Colors.grey.withOpacity(0.4),
+                                  child: const Icon(Icons.video_call_outlined),
+                                ),
+                                (0.02 * width).addWSpace(),
+                                InkResponse(
+                                  onTap: () {},
+                                  onHover: (value) {
+                                    setState(() {
+                                      isHover = value;
+                                    });
+                                  },
+                                  hoverColor: Colors.grey.withOpacity(0.4),
+                                  child: const Icon(Icons.notifications_active),
+                                ),
+                                (0.02 * width).addWSpace(),
+                                CircleAvatar(
+                                  backgroundColor: Colors.purple.shade300,
+                                  child: const Text(
+                                    "H",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          (0.015 * height).addHSpace(),
+                          Row(
+                            children: [
+                              Container(
+                                height: 0.999 * height,
+                                width: 0.18 * width,
+                                padding: EdgeInsets.only(
+                                  bottom: 0.04 * height,
+                                  left: 0.005 * width,
+                                ),
+                                child: InkWell(
+                                  onTap: () {},
+                                  onHover: (value) {
+                                    setState(() {
+                                      isHover = value;
+                                    });
+                                  },
+                                  child: RawScrollbar(
+                                    controller: scrollController,
+                                    thumbColor: Colors.grey,
+                                    thickness: 0.006 * width,
+                                    thumbVisibility: isHover ? true : false,
+                                    padding: EdgeInsets.only(
+                                        top: 0.012 * height,
+                                        bottom: 0.07 * height),
+                                    child: ListView.separated(
+                                      controller: scrollController,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                              right: 0.01 * width),
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                selectFunction = index;
+                                              });
+                                            },
+                                            onHover: (value) {
+                                              isHover = value;
+                                            },
+                                            hoverColor:
+                                                Colors.grey.withOpacity(0.4),
+                                            borderRadius: BorderRadius.circular(
+                                                0.007 * width),
+                                            child: Container(
+                                              height: 0.06 * height,
+                                              width: 0.15 * width,
+                                              decoration: BoxDecoration(
+                                                color: selectFunction == index
+                                                    ? Colors.grey
+                                                        .withOpacity(0.4)
+                                                    : Colors.transparent,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        0.005 * width),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  (0.01 * width).addWSpace(),
+                                                  Icon(allData2[index]["icon"]),
+                                                  (0.01 * width).addWSpace(),
+                                                  Text(
+                                                    "${allData2[index]["name"]}",
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return index == 2
+                                            ? Column(
+                                                children: [
+                                                  Divider(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.4),
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 0.01 * width),
+                                                    child: Row(
+                                                      children: [
+                                                        const Text(
+                                                          "You",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                        (0.007 * width)
+                                                            .addWSpace(),
+                                                        Icon(
+                                                          Icons
+                                                              .arrow_forward_ios_rounded,
+                                                          size: 0.012 * width,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            : index == 6
+                                                ? Column(
+                                                    children: [
+                                                      Divider(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.4),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 0.01 *
+                                                                    width,
+                                                                right: 0.1 *
+                                                                    width),
+                                                        child: const Text(
+                                                          "Explore",
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 17,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                                : index == 17
+                                                    ? Column(
+                                                        children: [
+                                                          Divider(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    0.4),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 0.01 *
+                                                                        width,
+                                                                    right: 0.04 *
+                                                                        width),
+                                                            child: const Text(
+                                                              "More from YouTube",
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 17,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      )
+                                                    : index == 20
+                                                        ? Divider(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    0.4),
+                                                          )
+                                                        : index == 24
+                                                            ? Column(
+                                                                children: [
+                                                                  Divider(
+                                                                    color: Colors
+                                                                        .grey
+                                                                        .withOpacity(
+                                                                            0.4),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        left: 0.01 *
+                                                                            width,
+                                                                        right: 0.04 *
+                                                                            width),
+                                                                    child:
+                                                                        const Text(
+                                                                      "About Press Copyright Contact us Creators Advertise Developers TermsPrivacy Policy & SafetyHow YouTube worksTest new features",
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            17,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            : const SizedBox();
+                                      },
+                                      itemCount: allData2.length,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              (0.01 * width).addWSpace(),
+                              SizedBox(
+                                height: 0.999 * height,
+                                width: 0.8 * width,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 0.05 * height,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: data.length,
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                select = index;
+                                              });
+                                            },
+                                            onHover: (value) {
+                                              setState(() {
+                                                isHover = value;
+                                              });
+                                            },
+                                            borderRadius: BorderRadius.circular(
+                                                0.01 * height),
+                                            hoverColor:
+                                                Colors.grey.withOpacity(0.1),
+                                            child: Container(
+                                              margin: EdgeInsets.symmetric(
+                                                horizontal: 0.005 * width,
+                                                vertical: 0,
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 0.02 * width,
+                                                  vertical: 0.01 * height),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        0.015 * height),
+                                                color: select == index
+                                                    ? Colors.white
+                                                    : Colors.grey
+                                                        .withOpacity(0.2),
+                                              ),
+                                              child: Text(
+                                                "${data[index]}",
+                                                style: TextStyle(
+                                                  color: select == index
+                                                      ? Colors.black
+                                                      : Colors.white,
                                                 ),
                                               ),
                                             ),
                                           );
                                         },
-                                        separatorBuilder: (context, index) {
-                                          return index == 2
-                                              ? Column(
-                                                  children: [
-                                                    Divider(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.4),
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 0.01 * width),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            "You",
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize:
-                                                                  0.011 * width,
-                                                            ),
-                                                          ),
-                                                          (0.007 * width)
-                                                              .addWSpace(),
-                                                          Icon(
-                                                            Icons
-                                                                .arrow_forward_ios_rounded,
-                                                            size: 0.012 * width,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                )
-                                              : index == 6
-                                                  ? Column(
-                                                      children: [
-                                                        Divider(
-                                                          color: Colors.grey
-                                                              .withOpacity(0.4),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 0.01 *
-                                                                      width,
-                                                                  right: 0.125 *
-                                                                      width),
-                                                          child: Text(
-                                                            "Explore",
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize:
-                                                                  0.011 * width,
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    )
-                                                  : index == 17
-                                                      ? Column(
-                                                          children: [
-                                                            Divider(
-                                                              color: Colors.grey
-                                                                  .withOpacity(
-                                                                      0.4),
-                                                            ),
-                                                            Padding(
-                                                              padding: EdgeInsets.only(
-                                                                  left: 0.01 *
-                                                                      width,
-                                                                  right: 0.06 *
-                                                                      width),
-                                                              child: Text(
-                                                                "More from YouTube",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize:
-                                                                      0.011 *
-                                                                          width,
-                                                                ),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        )
-                                                      : index == 20
-                                                          ? Divider(
-                                                              color: Colors.grey
-                                                                  .withOpacity(
-                                                                      0.4),
-                                                            )
-                                                          : index == 24
-                                                              ? Column(
-                                                                  children: [
-                                                                    Divider(
-                                                                      color: Colors
-                                                                          .grey
-                                                                          .withOpacity(
-                                                                              0.4),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: EdgeInsets.only(
-                                                                          left: 0.01 *
-                                                                              width,
-                                                                          right:
-                                                                              0.04 * width),
-                                                                      child:
-                                                                          Text(
-                                                                        "About Press Copyright Contact us Creators Advertise Developers TermsPrivacy Policy & SafetyHow YouTube worksTest new features",
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              0.012 * width,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                )
-                                                              : const SizedBox();
-                                        },
-                                        itemCount: allData2.length,
                                       ),
                                     ),
-                                  ),
-                                ),
-                                (0.01 * width).addWSpace(),
-                                SizedBox(
-                                  height: 0.999 * height,
-                                  width: 0.8 * width,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: 0.05 * height,
-                                        child: Row(
-                                          children: List.generate(
-                                            data.length,
-                                            (index) => InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  select = index;
-                                                });
-                                              },
-                                              onHover: (value) {
-                                                setState(() {
-                                                  isHover = value;
-                                                });
-                                              },
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      0.01 * height),
-                                              hoverColor:
-                                                  Colors.grey.withOpacity(0.1),
-                                              child: Container(
-                                                margin: EdgeInsets.symmetric(
-                                                  horizontal: 0.005 * width,
-                                                  vertical: 0,
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 0.02 * width,
-                                                    vertical: 0.01 * height),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.015 * height),
-                                                  color: select == index
-                                                      ? Colors.white
-                                                      : Colors.grey
-                                                          .withOpacity(0.2),
-                                                ),
-                                                child: Text(
-                                                  "${data[index]}",
-                                                  style: TextStyle(
-                                                    color: select == index
-                                                        ? Colors.black
-                                                        : Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                    (0.015 * height).addHSpace(),
+                                    Expanded(
+                                      child: GridView.builder(
+                                        controller: scrollController2,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          childAspectRatio: 0.00125 * height,
+                                          crossAxisSpacing: 0.01 * width,
                                         ),
-                                      ),
-                                      (0.015 * height).addHSpace(),
-                                      Expanded(
-                                        child: GridView.builder(
-                                          controller: scrollController2,
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3,
-                                            childAspectRatio: 0.00125 * height,
-                                            crossAxisSpacing: 0.01 * width,
-                                          ),
-                                          itemCount: allData.length,
-                                          padding: EdgeInsets.zero,
-                                          itemBuilder: (context, index) {
-                                            return InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  selectVideo = index;
-                                                });
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          VideoPlayScreen(
-                                                        video: allData[index]
-                                                            ["video"],
-                                                      ),
-                                                    ));
-                                              },
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    height: 0.3 * height,
-                                                    width: double.infinity,
-                                                    decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                          image: NetworkImage(
-                                                              "${allData[index]["image"]}"),
-                                                          fit: BoxFit.cover),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              0.01 * height),
+                                        itemCount: allData.length,
+                                        padding: EdgeInsets.zero,
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                selectVideo = index;
+                                              });
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        VideoPlayScreen(
+                                                      video: allData[index]
+                                                          ["video"],
                                                     ),
+                                                  ));
+                                            },
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  height: 0.3 * height,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            "${allData[index]["image"]}"),
+                                                        fit: BoxFit.cover),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0.01 * height),
                                                   ),
-                                                  (0.01 * height).addHSpace(),
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      CircleAvatar(
-                                                        radius: 0.018 * width,
-                                                        backgroundImage:
-                                                            NetworkImage(
-                                                                "${allData[index]["logo"]}"),
-                                                      ),
-                                                      (0.01 * width)
-                                                          .addWSpace(),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 0.17 * width,
-                                                            child: Text(
-                                                              "${allData[index]["title"]}",
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize:
-                                                                    0.013 *
-                                                                        width,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            "${allData[index]["name"]}",
-                                                            style: TextStyle(
+                                                ),
+                                                (0.01 * height).addHSpace(),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    CircleAvatar(
+                                                      radius: 0.018 * width,
+                                                      backgroundImage: NetworkImage(
+                                                          "${allData[index]["logo"]}"),
+                                                    ),
+                                                    (0.01 * width).addWSpace(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 0.17 * width,
+                                                          child: Text(
+                                                            "${allData[index]["title"]}",
+                                                            style:
+                                                                const TextStyle(
                                                               color:
-                                                                  Colors.grey,
-                                                              fontSize:
-                                                                  0.011 * width,
+                                                                  Colors.white,
+                                                              fontSize: 17,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
                                                             ),
                                                           ),
-                                                          Row(
-                                                            children: [
-                                                              Text(
-                                                                "${allData[index]["views"]}",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  fontSize:
-                                                                      0.011 *
-                                                                          width,
-                                                                ),
-                                                              ),
-                                                              (0.01 * width)
-                                                                  .addWSpace(),
-                                                              Icon(
-                                                                Icons.circle,
+                                                        ),
+                                                        Text(
+                                                          "${allData[index]["name"]}",
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.grey,
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              "${allData[index]["views"]}",
+                                                              style:
+                                                                  const TextStyle(
                                                                 color:
                                                                     Colors.grey,
-                                                                size: 0.008 *
-                                                                    height,
+                                                                fontSize: 13,
                                                               ),
-                                                              (0.01 * width)
-                                                                  .addWSpace(),
-                                                              Text(
-                                                                "${allData[index]["time"]}",
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  fontSize:
-                                                                      0.011 *
-                                                                          width,
-                                                                ),
+                                                            ),
+                                                            (0.01 * width)
+                                                                .addWSpace(),
+                                                            Icon(
+                                                              Icons.circle,
+                                                              color:
+                                                                  Colors.grey,
+                                                              size: 0.008 *
+                                                                  height,
+                                                            ),
+                                                            (0.01 * width)
+                                                                .addWSpace(),
+                                                            Text(
+                                                              "${allData[index]["time"]}",
+                                                              style:
+                                                                  const TextStyle(
+                                                                color:
+                                                                    Colors.grey,
+                                                                fontSize: 13,
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const Spacer(),
-                                                      InkResponse(
-                                                        onTap: () {},
-                                                        child: const Icon(
-                                                            Icons.more_vert),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const Spacer(),
+                                                    InkResponse(
+                                                      onTap: () {},
+                                                      child: const Icon(
+                                                          Icons.more_vert),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          left: 0.17 * width,
-                          top: 0.08 * height,
-                          child: InkResponse(
-                            onTap: () {
-                              setState(() {
-                                scrollController
-                                    .jumpTo(scrollController.offset - 70);
-                              });
-                            },
-                            child: Icon(
-                              Icons.arrow_drop_up,
-                              size: 0.014 * width,
-                            ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Positioned(
-                          top: 0.9 * height,
-                          bottom: 0,
-                          left: 0.17 * width,
-                          child: InkResponse(
-                            onTap: () {
-                              setState(() {
-                                scrollController
-                                    .jumpTo(scrollController.offset + 70);
-                              });
-                            },
-                            child: Icon(
-                              Icons.arrow_drop_down,
-                              size: 0.014 * width,
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-        ),
-      ),
+                    Positioned(
+                      left: 0.17 * width,
+                      top: 0.08 * height,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            scrollController
+                                .jumpTo(scrollController.offset - 70);
+                          });
+                        },
+                        child: Icon(
+                          Icons.arrow_drop_up,
+                          size: 0.014 * width,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0.17 * width,
+                      child: InkResponse(
+                        onTap: () {
+                          setState(() {
+                            scrollController
+                                .jumpTo(scrollController.offset + 70);
+                          });
+                        },
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          size: 0.014 * width,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
     );
   }
 }
