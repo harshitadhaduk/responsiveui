@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:responsive_ui/responsive_ui/Screens/video_play_screen.dart';
 import 'package:responsive_ui/responsive_ui/general/sized_box.dart';
@@ -234,7 +232,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -280,9 +277,9 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                 RawScrollbar(
                   controller: scrollController,
                   thumbVisibility: true,
-                  thickness: 0.016 * width,
+                  thickness: 0.019 * width,
                   thumbColor: Colors.grey,
-                  padding: EdgeInsets.symmetric(vertical: 0.025 * height),
+                  padding: EdgeInsets.only(top: 0.025 * height),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 0.04 * width),
                     child: Column(
@@ -290,6 +287,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         (0.015 * height).addHSpace(),
                         Row(
                           children: [
+                            5.0.addWSpace(),
                             InkResponse(
                               onTap: () {},
                               onHover: (value) {
@@ -297,6 +295,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   isHover = value;
                                 });
                               },
+                              radius: 20,
                               hoverColor: Colors.grey.withOpacity(0.4),
                               child: const Icon(Icons.menu),
                             ),
@@ -315,7 +314,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 color: Colors.white,
                               ),
                             ),
-                            (0.01 * width).addWSpace(),
                             Text(
                               "YouTube",
                               style: TextStyle(
@@ -331,6 +329,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   isHover = value;
                                 });
                               },
+                              radius: 20,
                               hoverColor: Colors.grey.withOpacity(0.4),
                               child: const Icon(Icons.search_sharp),
                             ),
@@ -342,6 +341,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     isHover = value;
                                   });
                                 },
+                                radius: 20,
                                 hoverColor: Colors.grey.withOpacity(0.4),
                                 child: const Icon(Icons.mic)),
                             (0.02 * width).addWSpace(),
@@ -352,6 +352,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   isHover = value;
                                 });
                               },
+                              radius: 20,
                               hoverColor: Colors.grey.withOpacity(0.4),
                               child: const Icon(Icons.video_call_outlined),
                             ),
@@ -363,6 +364,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   isHover = value;
                                 });
                               },
+                              radius: 20,
                               hoverColor: Colors.grey.withOpacity(0.4),
                               child: const Icon(Icons.notifications_active),
                             ),
@@ -432,6 +434,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                           child: ListView.builder(
                             controller: scrollController,
                             itemCount: allData.length,
+                            padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
@@ -474,7 +477,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           CircleAvatar(
-                                            radius: 0.018 * width,
+                                            radius: 0.035 * width,
                                             backgroundImage: NetworkImage(
                                                 "${allData[index]["logo"]}"),
                                           ),
@@ -507,13 +510,13 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                       fontSize: 14,
                                                     ),
                                                   ),
-                                                  (0.01 * width).addWSpace(),
+                                                  (0.015 * width).addWSpace(),
                                                   Icon(
                                                     Icons.circle,
                                                     color: Colors.grey,
                                                     size: 0.01 * height,
                                                   ),
-                                                  (0.01 * width).addWSpace(),
+                                                  (0.015 * width).addWSpace(),
                                                   Text(
                                                     "${allData[index]["time"]}",
                                                     style: const TextStyle(
@@ -552,10 +555,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         scrollController.jumpTo(scrollController.offset - 70);
                       });
                     },
-                    child: Icon(
-                      Icons.arrow_drop_up,
-                      size: 0.04 * width,
-                    ),
+                    child: Icon(Icons.arrow_drop_up, size: 0.04 * width),
                   ),
                 ),
                 Positioned(
@@ -568,10 +568,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         scrollController.jumpTo(scrollController.offset + 70);
                       });
                     },
-                    child: Icon(
-                      Icons.arrow_drop_down,
-                      size: 0.038 * width,
-                    ),
+                    child: Icon(Icons.arrow_drop_down, size: 0.04 * width),
                   ),
                 ),
               ],
@@ -584,15 +581,15 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                       child: RawScrollbar(
                         controller: scrollController,
                         thumbVisibility: true,
-                        thickness: 0.016 * width,
+                        thickness: 0.014 * width,
                         thumbColor: Colors.grey,
-                        padding: EdgeInsets.symmetric(vertical: 0.025 * height),
+                        padding: EdgeInsets.symmetric(vertical: 0.03 * height),
                         child: Column(
                           children: [
                             (0.01 * height).addHSpace(),
                             Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 0.015 * width),
+                              padding: EdgeInsets.only(
+                                  right: 0.02 * width, left: 20),
                               child: Row(
                                 children: [
                                   InkResponse(
@@ -602,10 +599,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                         isHover = value;
                                       });
                                     },
+                                    radius: 20,
                                     hoverColor: Colors.grey.withOpacity(0.4),
                                     child: const Icon(Icons.menu),
                                   ),
-                                  (0.02 * width).addWSpace(),
+                                  (20.0).addWSpace(),
                                   Container(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 0.015 * width,
@@ -615,12 +613,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       borderRadius:
                                           BorderRadius.circular(0.01 * height),
                                     ),
-                                    child: const Icon(
-                                      Icons.play_arrow,
-                                      color: Colors.white,
-                                    ),
+                                    child: const Icon(Icons.play_arrow),
                                   ),
-                                  (0.01 * width).addWSpace(),
                                   const Text(
                                     "YouTube",
                                     style: TextStyle(
@@ -700,15 +694,14 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                         isHover = value;
                                       });
                                     },
+                                    radius: 20,
                                     hoverColor: Colors.grey.withOpacity(0.4),
                                     child: CircleAvatar(
-                                      radius: 0.03 * height,
+                                      radius: 0.025 * height,
                                       backgroundColor:
                                           Colors.grey.withOpacity(0.3),
-                                      child: const Icon(
-                                        Icons.mic,
-                                        color: Colors.white,
-                                      ),
+                                      child: const Icon(Icons.mic,
+                                          color: Colors.white),
                                     ),
                                   ),
                                   const Spacer(),
@@ -719,11 +712,12 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                         isHover = value;
                                       });
                                     },
+                                    radius: 20,
                                     hoverColor: Colors.grey.withOpacity(0.4),
                                     child:
                                         const Icon(Icons.video_call_outlined),
                                   ),
-                                  (0.04 * width).addWSpace(),
+                                  (20.0).addWSpace(),
                                   InkResponse(
                                     onTap: () {},
                                     onHover: (value) {
@@ -731,18 +725,17 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                         isHover = value;
                                       });
                                     },
+                                    radius: 20,
                                     hoverColor: Colors.grey.withOpacity(0.4),
                                     child:
                                         const Icon(Icons.notifications_active),
                                   ),
-                                  (0.04 * width).addWSpace(),
+                                  (20.0).addWSpace(),
                                   CircleAvatar(
                                     backgroundColor: Colors.purple.shade300,
                                     child: const Text(
                                       "H",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
+                                      style: TextStyle(color: Colors.white),
                                     ),
                                   ),
                                 ],
@@ -754,140 +747,136 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {},
-                                        onHover: (value) {
-                                          setState(() {
-                                            isHover = value;
-                                          });
-                                        },
-                                        borderRadius: BorderRadius.circular(
-                                            0.01 * height),
-                                        hoverColor:
-                                            Colors.grey.withOpacity(0.4),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 0.013 * width,
-                                              vertical: 0.015 * height),
-                                          child: Column(
-                                            children: [
-                                              Icon(
-                                                Icons.home,
-                                                size: 0.04 * width,
-                                              ),
-                                              const Text(
-                                                "Home",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {},
-                                        onHover: (value) {
-                                          setState(() {
-                                            isHover = value;
-                                          });
-                                        },
-                                        borderRadius: BorderRadius.circular(
-                                            0.01 * height),
-                                        hoverColor:
-                                            Colors.grey.withOpacity(0.4),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 0.013 * width,
-                                              vertical: 0.015 * height),
-                                          child: Column(
-                                            children: [
-                                              Icon(
-                                                Icons.add,
-                                                size: 0.04 * width,
-                                              ),
-                                              const Text(
-                                                "Shorts",
-                                                style: TextStyle(
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(right: 0.01 * width),
+                                    child: Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {},
+                                          onHover: (value) {
+                                            setState(() {
+                                              isHover = value;
+                                            });
+                                          },
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          hoverColor:
+                                              Colors.grey.withOpacity(0.4),
+                                          child: Container(
+                                            width: 60,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: const Column(
+                                              children: [
+                                                Icon(Icons.home),
+                                                Text(
+                                                  "Home",
+                                                  style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 14),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {},
-                                        onHover: (value) {
-                                          setState(() {
-                                            isHover = value;
-                                          });
-                                        },
-                                        borderRadius: BorderRadius.circular(
-                                            0.01 * height),
-                                        hoverColor:
-                                            Colors.grey.withOpacity(0.4),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 0.013 * width,
-                                              vertical: 0.015 * height),
-                                          child: Column(
-                                            children: [
-                                              Icon(
-                                                Icons.subscriptions,
-                                                size: 0.04 * width,
-                                              ),
-                                              const Text(
-                                                "Subscription",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
+                                                    fontSize: 10,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {},
-                                        onHover: (value) {
-                                          setState(() {
-                                            isHover = value;
-                                          });
-                                        },
-                                        borderRadius: BorderRadius.circular(
-                                            0.01 * height),
-                                        hoverColor:
-                                            Colors.grey.withOpacity(0.4),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 0.013 * width,
-                                              vertical: 0.015 * height),
-                                          child: Column(
-                                            children: [
-                                              Icon(
-                                                Icons.person,
-                                                size: 0.04 * width,
-                                              ),
-                                              const Text(
-                                                "You",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
+                                        InkWell(
+                                          onTap: () {},
+                                          onHover: (value) {
+                                            setState(() {
+                                              isHover = value;
+                                            });
+                                          },
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          hoverColor:
+                                              Colors.grey.withOpacity(0.4),
+                                          child: Container(
+                                            width: 60,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: const Column(
+                                              children: [
+                                                Icon(Icons.add),
+                                                Text(
+                                                  "Shorts",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 10),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        InkWell(
+                                          onTap: () {},
+                                          onHover: (value) {
+                                            setState(() {
+                                              isHover = value;
+                                            });
+                                          },
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          hoverColor:
+                                              Colors.grey.withOpacity(0.4),
+                                          child: Container(
+                                            width: 60,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: const Column(
+                                              children: [
+                                                Icon(Icons.subscriptions),
+                                                Text(
+                                                  "Subscription",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 10,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {},
+                                          onHover: (value) {
+                                            setState(() {
+                                              isHover = value;
+                                            });
+                                          },
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          hoverColor:
+                                              Colors.grey.withOpacity(0.4),
+                                          child: Container(
+                                            width: 60,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: const Column(
+                                              children: [
+                                                Icon(Icons.person),
+                                                Text(
+                                                  "You",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 10,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
-                                    width: 0.83 * width,
+                                    height: context.height,
+                                    width: 0.88 * width,
                                     child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         (0.01 * height).addHSpace(),
                                         SizedBox(
@@ -896,6 +885,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                             scrollDirection: Axis.horizontal,
                                             shrinkWrap: true,
                                             itemCount: data.length,
+                                            padding: EdgeInsets.zero,
                                             itemBuilder: (context, index) {
                                               return InkWell(
                                                 onTap: () {
@@ -909,8 +899,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                   });
                                                 },
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        0.01 * height),
+                                                    BorderRadius.circular(10),
                                                 hoverColor: Colors.grey
                                                     .withOpacity(0.1),
                                                 child: Container(
@@ -922,7 +911,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            0.015 * height),
+                                                            10),
                                                     color: select == index
                                                         ? Colors.white
                                                         : Colors.grey
@@ -942,19 +931,19 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           ),
                                         ),
                                         (0.01 * height).addHSpace(),
-                                        SizedBox(
-                                          height: context.height,
-                                          width: 0.85 * width,
+                                        Expanded(
                                           child: GridView.builder(
                                             controller: scrollController,
                                             gridDelegate:
                                                 SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,
-                                              childAspectRatio: 0.0014 * height,
                                               crossAxisSpacing: 0.01 * width,
+                                              mainAxisSpacing: 0.01 * height,
+                                              mainAxisExtent: 0.39 * height,
                                             ),
+                                            padding: EdgeInsets.only(
+                                                bottom: 0.07 * height),
                                             itemCount: allData.length,
-                                            padding: EdgeInsets.zero,
                                             itemBuilder: (context, index) {
                                               return InkWell(
                                                 onTap: () {
@@ -974,9 +963,12 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                 child: Column(
                                                   children: [
                                                     Container(
-                                                      height: 0.23 * height,
+                                                      height: 0.25 * height,
                                                       width: double.infinity,
                                                       decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
                                                         image: DecorationImage(
                                                             image: NetworkImage(
                                                                 "${allData[index]["image"]}"),
@@ -995,7 +987,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               NetworkImage(
                                                                   "${allData[index]["logo"]}"),
                                                         ),
-                                                        (0.02 * width)
+                                                        (0.015 * width)
                                                             .addWSpace(),
                                                         Column(
                                                           crossAxisAlignment:
@@ -1004,14 +996,15 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                           children: [
                                                             SizedBox(
                                                               width:
-                                                                  0.299 * width,
+                                                                  0.315 * width,
                                                               child: Text(
                                                                 "${allData[index]["title"]}",
                                                                 style:
                                                                     const TextStyle(
                                                                   color: Colors
                                                                       .white,
-                                                                  fontSize: 18,
+                                                                  fontSize:
+                                                                      16.5,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -1024,7 +1017,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                   const TextStyle(
                                                                 color:
                                                                     Colors.grey,
-                                                                fontSize: 15.5,
+                                                                fontSize: 14,
                                                               ),
                                                             ),
                                                             Row(
@@ -1036,7 +1029,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                     color: Colors
                                                                         .grey,
                                                                     fontSize:
-                                                                        14,
+                                                                        13,
                                                                   ),
                                                                 ),
                                                                 (0.01 * width)
@@ -1045,7 +1038,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                   Icons.circle,
                                                                   color: Colors
                                                                       .grey,
-                                                                  size: 0.008 *
+                                                                  size: 0.007 *
                                                                       height,
                                                                 ),
                                                                 (0.01 * width)
@@ -1057,7 +1050,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                     color: Colors
                                                                         .grey,
                                                                     fontSize:
-                                                                        14,
+                                                                        13,
                                                                   ),
                                                                 ),
                                                               ],
@@ -1068,8 +1061,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                         InkResponse(
                                                           onTap: () {},
                                                           child: const Icon(
-                                                            Icons.more_vert,
-                                                          ),
+                                                              Icons.more_vert),
                                                         ),
                                                       ],
                                                     )
@@ -1101,7 +1093,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         },
                         child: Icon(
                           Icons.arrow_drop_up,
-                          size: 0.033 * width,
+                          size: 0.036 * width,
                         ),
                       ),
                     ),
@@ -1116,10 +1108,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 .jumpTo(scrollController.offset + 70);
                           });
                         },
-                        child: Icon(
-                          Icons.arrow_drop_down,
-                          size: 0.033 * width,
-                        ),
+                        child: Icon(Icons.arrow_drop_down, size: 0.036 * width),
                       ),
                     ),
                   ],
@@ -1133,8 +1122,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         children: [
                           (0.015 * height).addHSpace(),
                           Padding(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 0.02 * width),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Row(
                               children: [
                                 InkResponse(
@@ -1144,10 +1132,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       isHover = value;
                                     });
                                   },
+                                  radius: 20,
                                   hoverColor: Colors.grey.withOpacity(0.4),
                                   child: const Icon(Icons.menu),
                                 ),
-                                (0.02 * width).addWSpace(),
+                                20.0.addWSpace(),
                                 Container(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 0.01 * width,
@@ -1162,7 +1151,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                (0.01 * width).addWSpace(),
                                 Text(
                                   "YouTube",
                                   style: TextStyle(
@@ -1170,7 +1158,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     fontSize: 0.02 * width,
                                   ),
                                 ),
-                                (0.1 * width).addWSpace(),
+                                120.0.addWSpace(),
                                 Container(
                                   height: 0.05 * height,
                                   width: 0.4 * width,
@@ -1232,7 +1220,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     ],
                                   ),
                                 ),
-                                (0.02 * width).addWSpace(),
+                                20.0.addWSpace(),
                                 InkResponse(
                                   onTap: () {},
                                   onHover: (value) {
@@ -1240,6 +1228,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       isHover = value;
                                     });
                                   },
+                                  radius: 20,
                                   hoverColor: Colors.grey.withOpacity(0.4),
                                   child: CircleAvatar(
                                     radius: 0.03 * height,
@@ -1259,10 +1248,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       isHover = value;
                                     });
                                   },
+                                  radius: 20,
                                   hoverColor: Colors.grey.withOpacity(0.4),
                                   child: const Icon(Icons.video_call_outlined),
                                 ),
-                                (0.02 * width).addWSpace(),
+                                25.0.addWSpace(),
                                 InkResponse(
                                   onTap: () {},
                                   onHover: (value) {
@@ -1270,10 +1260,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       isHover = value;
                                     });
                                   },
+                                  radius: 20,
                                   hoverColor: Colors.grey.withOpacity(0.4),
                                   child: const Icon(Icons.notifications_active),
                                 ),
-                                (0.02 * width).addWSpace(),
+                                25.0.addWSpace(),
                                 CircleAvatar(
                                   backgroundColor: Colors.purple.shade300,
                                   child: const Text(
@@ -1291,10 +1282,10 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                             children: [
                               Container(
                                 height: 0.999 * height,
-                                width: 0.18 * width,
+                                width: 212,
                                 padding: EdgeInsets.only(
                                   bottom: 0.04 * height,
-                                  left: 0.005 * width,
+                                  left: 5,
                                 ),
                                 child: InkWell(
                                   onTap: () {},
@@ -1315,8 +1306,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       controller: scrollController,
                                       itemBuilder: (context, index) {
                                         return Padding(
-                                          padding: EdgeInsets.only(
-                                              right: 0.01 * width),
+                                          padding:
+                                              const EdgeInsets.only(right: 15),
                                           child: InkWell(
                                             onTap: () {
                                               setState(() {
@@ -1328,19 +1319,18 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                             },
                                             hoverColor:
                                                 Colors.grey.withOpacity(0.4),
-                                            borderRadius: BorderRadius.circular(
-                                                0.007 * width),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
                                             child: Container(
-                                              height: 0.06 * height,
-                                              width: 0.15 * width,
+                                              height: 45,
+                                              width: 110,
                                               decoration: BoxDecoration(
                                                 color: selectFunction == index
                                                     ? Colors.grey
                                                         .withOpacity(0.4)
                                                     : Colors.transparent,
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        0.005 * width),
+                                                    BorderRadius.circular(5),
                                               ),
                                               child: Row(
                                                 children: [
@@ -1369,8 +1359,9 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                         .withOpacity(0.4),
                                                   ),
                                                   Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 0.01 * width),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 14),
                                                     child: Row(
                                                       children: [
                                                         const Text(
@@ -1399,18 +1390,20 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                         color: Colors.grey
                                                             .withOpacity(0.4),
                                                       ),
-                                                      Padding(
+                                                      const Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                left: 0.01 *
-                                                                    width,
-                                                                right: 0.1 *
-                                                                    width),
-                                                        child: const Text(
-                                                          "Explore",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 17,
+                                                                left: 10),
+                                                        child: Align(
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          child: Text(
+                                                            "Explore",
+                                                            style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 17,
+                                                            ),
                                                           ),
                                                         ),
                                                       )
@@ -1424,19 +1417,21 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                 .withOpacity(
                                                                     0.4),
                                                           ),
-                                                          Padding(
+                                                          const Padding(
                                                             padding:
                                                                 EdgeInsets.only(
-                                                                    left: 0.01 *
-                                                                        width,
-                                                                    right: 0.04 *
-                                                                        width),
-                                                            child: const Text(
-                                                              "More from YouTube",
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 17,
+                                                                    left: 14),
+                                                            child: Align(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              child: Text(
+                                                                "More from YouTube",
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 17,
+                                                                ),
                                                               ),
                                                             ),
                                                           )
@@ -1457,21 +1452,27 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                         .withOpacity(
                                                                             0.4),
                                                                   ),
-                                                                  Padding(
+                                                                  const Padding(
                                                                     padding: EdgeInsets.only(
-                                                                        left: 0.01 *
-                                                                            width,
-                                                                        right: 0.04 *
-                                                                            width),
+                                                                        left:
+                                                                            14,
+                                                                        right:
+                                                                            10),
                                                                     child:
-                                                                        const Text(
-                                                                      "About Press Copyright Contact us Creators Advertise Developers TermsPrivacy Policy & SafetyHow YouTube worksTest new features",
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            17,
+                                                                        Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .centerLeft,
+                                                                      child:
+                                                                          Text(
+                                                                        "About Press Copyright Contact us Creators Advertise Developers TermsPrivacy Policy & SafetyHow YouTube worksTest new features",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              Colors.white,
+                                                                          fontSize:
+                                                                              17,
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
@@ -1484,10 +1485,10 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   ),
                                 ),
                               ),
-                              (0.01 * width).addWSpace(),
+                              10.0.addWSpace(),
                               SizedBox(
                                 height: 0.999 * height,
-                                width: 0.8 * width,
+                                width: 0.79 * width,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -1514,9 +1515,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                 Colors.grey.withOpacity(0.1),
                                             child: Container(
                                               margin: EdgeInsets.symmetric(
-                                                horizontal: 0.005 * width,
-                                                vertical: 0,
-                                              ),
+                                                  horizontal: 0.005 * width),
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 0.02 * width,
                                                   vertical: 0.01 * height),
@@ -1549,11 +1548,12 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 3,
-                                          childAspectRatio: 0.00125 * height,
+                                          mainAxisExtent: 0.38 * height,
                                           crossAxisSpacing: 0.01 * width,
                                         ),
                                         itemCount: allData.length,
-                                        padding: EdgeInsets.zero,
+                                        padding: EdgeInsets.only(
+                                            bottom: 0.1 * height),
                                         itemBuilder: (context, index) {
                                           return InkWell(
                                             onTap: () {
@@ -1573,16 +1573,16 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  height: 0.3 * height,
+                                                  height: 0.25 * height,
                                                   width: double.infinity,
                                                   decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
                                                     image: DecorationImage(
                                                         image: NetworkImage(
                                                             "${allData[index]["image"]}"),
                                                         fit: BoxFit.cover),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.01 * height),
                                                   ),
                                                 ),
                                                 (0.01 * height).addHSpace(),
@@ -1591,7 +1591,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     CircleAvatar(
-                                                      radius: 0.018 * width,
+                                                      radius: 0.017 * width,
                                                       backgroundImage: NetworkImage(
                                                           "${allData[index]["logo"]}"),
                                                     ),
@@ -1602,14 +1602,14 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               .start,
                                                       children: [
                                                         SizedBox(
-                                                          width: 0.17 * width,
+                                                          width: 0.185 * width,
                                                           child: Text(
                                                             "${allData[index]["title"]}",
                                                             style:
                                                                 const TextStyle(
                                                               color:
                                                                   Colors.white,
-                                                              fontSize: 17,
+                                                              fontSize: 15,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -1621,7 +1621,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                           style:
                                                               const TextStyle(
                                                             color: Colors.grey,
-                                                            fontSize: 14,
+                                                            fontSize: 13,
                                                           ),
                                                         ),
                                                         Row(
@@ -1632,7 +1632,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                   const TextStyle(
                                                                 color:
                                                                     Colors.grey,
-                                                                fontSize: 13,
+                                                                fontSize: 12,
                                                               ),
                                                             ),
                                                             (0.01 * width)
@@ -1641,7 +1641,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               Icons.circle,
                                                               color:
                                                                   Colors.grey,
-                                                              size: 0.008 *
+                                                              size: 0.007 *
                                                                   height,
                                                             ),
                                                             (0.01 * width)
@@ -1652,7 +1652,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                   const TextStyle(
                                                                 color:
                                                                     Colors.grey,
-                                                                fontSize: 13,
+                                                                fontSize: 12,
                                                               ),
                                                             ),
                                                           ],
@@ -1682,7 +1682,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                       ),
                     ),
                     Positioned(
-                      left: 0.17 * width,
+                      left: 201,
                       top: 0.08 * height,
                       child: InkResponse(
                         onTap: () {
@@ -1699,7 +1699,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                     ),
                     Positioned(
                       bottom: 0,
-                      left: 0.17 * width,
+                      left: 201,
                       child: InkResponse(
                         onTap: () {
                           setState(() {
