@@ -12,9 +12,6 @@ class YoutubeUiScreen extends StatefulWidget {
 }
 
 class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
-  ScrollController scrollController = ScrollController();
-  ScrollController scrollController2 = ScrollController();
-  bool isHover = false;
   List data = [
     "All",
     "Mixes",
@@ -25,7 +22,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     "Jukebox",
     "Indian soap operas",
   ];
-  int select = 0;
   List<Map<String, dynamic>> allData = [
     {
       "name": "Ripples Code",
@@ -164,10 +160,13 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     {"icon": Icons.help_center_outlined, "name": "Send FeedBack"},
     {"icon": Icons.abc, "name": ""},
   ];
+  List<VideoPlayerController> videoData = [];
+  ScrollController scrollController = ScrollController();
+  ScrollController scrollController2 = ScrollController();
+  bool isHover = false;
+  int select = 0;
   int selectFunction = 0;
   int selectVideo = -1;
-
-  List<VideoPlayerController> videoData = [];
 
   @override
   void initState() {
@@ -244,7 +243,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
               children: [
                 Container(
                   height: 0.2 * height,
-                  width: 0.4 * width,
+                  width: 0.45 * width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -441,13 +440,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   setState(() {
                                     selectVideo = index;
                                   });
-
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => VideoPlayScreen(
                                           video: allData[index]["video"],
-                                          // video: videoData[index],
                                         ),
                                       ));
                                 },
@@ -1561,14 +1558,15 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                 selectVideo = index;
                                               });
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        VideoPlayScreen(
-                                                      video: allData[index]
-                                                          ["video"],
-                                                    ),
-                                                  ));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      VideoPlayScreen(
+                                                    video: allData[index]
+                                                        ["video"],
+                                                  ),
+                                                ),
+                                              );
                                             },
                                             child: Column(
                                               children: [
