@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_ui/responsive_ui/Controller/video_controller.dart';
 import 'package:responsive_ui/responsive_ui/Screens/video_play_screen.dart';
+
 import 'package:responsive_ui/responsive_ui/general/sized_box.dart';
-import 'package:video_player/video_player.dart';
+
+import '../general/show_video.dart';
 
 class YoutubeUiScreen extends StatefulWidget {
   const YoutubeUiScreen({super.key});
@@ -12,6 +15,7 @@ class YoutubeUiScreen extends StatefulWidget {
 }
 
 class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
+  VideoController videoController = Get.put(VideoController());
   List data = [
     "All",
     "Mixes",
@@ -23,116 +27,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     "Indian soap operas",
   ];
   List<Map<String, dynamic>> allData = [
-    {
-      "name": "Ripples Code",
-      "title": "Big Buck Bunny",
-      "views": "28k views",
-      "time": "3 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    },
-    {
-      "name": "Abc",
-      "title": "Elephant Dream",
-      "views": "30k views",
-      "time": "2 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    },
-    {
-      "name": "Xyz",
-      "title": "For Bigger Blazes",
-      "views": "30k views",
-      "time": "1 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    },
-    {
-      "name": "Nijsef",
-      "title": "For Bigger Escape",
-      "views": "1k views",
-      "time": "4 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    },
-    {
-      "name": "Abc",
-      "title": "For Bigger Fun",
-      "views": "30k views",
-      "time": "2 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    },
-    {
-      "name": "Abc",
-      "title": "For Bigger Joyrides",
-      "views": "30k views",
-      "time": "2 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    },
-    {
-      "name": "Abc",
-      "title": "For Bigger Meltdowns",
-      "views": "30k views",
-      "time": "2 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    },
-    {
-      "name": "Abc",
-      "title": "Sintel",
-      "views": "30k views",
-      "time": "2 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-    },
-    {
-      "name": "Abc",
-      "title": "Subaru Outback On Street And Dirt",
-      "views": "30k views",
-      "time": "2 years ago",
-      "image":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg",
-      "logo":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
-      "video":
-          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
-    },
-  ];
-  List<Map<String, dynamic>> allData2 = [
     {"icon": Icons.home, "name": "Home"},
     {"icon": Icons.send, "name": "Shorts"},
     {"icon": Icons.subscriptions, "name": "Subscription"},
@@ -160,79 +54,12 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     {"icon": Icons.help_center_outlined, "name": "Send FeedBack"},
     {"icon": Icons.abc, "name": ""},
   ];
-  List<VideoPlayerController> videoData = [];
   ScrollController scrollController = ScrollController();
   ScrollController scrollController2 = ScrollController();
   bool isHover = false;
+  int selectVideo = -1;
   int select = 0;
   int selectFunction = 0;
-  int selectVideo = -1;
-
-  void videoAllData() {
-    VideoPlayerController videoPlayerController0 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[0]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    VideoPlayerController videoPlayerController1 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[1]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    VideoPlayerController videoPlayerController2 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[2]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    VideoPlayerController videoPlayerController3 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[3]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    VideoPlayerController videoPlayerController4 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[4]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    VideoPlayerController videoPlayerController5 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[5]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    VideoPlayerController videoPlayerController6 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[6]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    VideoPlayerController videoPlayerController7 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[7]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-    VideoPlayerController videoPlayerController8 =
-        VideoPlayerController.networkUrl(Uri.parse("${allData[8]["video"]}"))
-          ..initialize().then((_) {
-            setState(() {});
-          });
-
-    videoData.addAll([
-      videoPlayerController0,
-      videoPlayerController1,
-      videoPlayerController2,
-      videoPlayerController3,
-      videoPlayerController4,
-      videoPlayerController5,
-      videoPlayerController6,
-      videoPlayerController7,
-      videoPlayerController8,
-    ]);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    videoAllData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -242,57 +69,66 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
       backgroundColor: Colors.black,
       floatingActionButton: selectVideo == -1
           ? const SizedBox()
-          : Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: 0.2 * height,
-                  width: 0.45 * width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: InkResponse(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: VideoPlayer(videoData[selectVideo]),
-                  ),
-                ),
-                InkResponse(
-                  onTap: () {
-                    setState(() {
-                      videoData[selectVideo].value.isPlaying
-                          ? videoData[selectVideo].pause()
-                          : videoData[selectVideo].play();
-                    });
-                  },
-                  child: Icon(
-                    videoData[selectVideo].value.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow,
-                  ),
-                ),
-              ],
-            ),
+          : ShowVideo(index: videoController.videoData[selectVideo]),
       body: SafeArea(
         child: width <= 600
             ? Stack(
                 children: [
-                  RawScrollbar(
-                    controller: scrollController,
-                    thumbVisibility: true,
-                    thickness: 0.019 * width,
-                    thumbColor: Colors.grey,
-                    padding: EdgeInsets.only(top: 0.025 * height),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 0.04 * width),
-                      child: Column(
-                        children: [
-                          (0.015 * height).addHSpace(),
-                          Row(
-                            children: [
-                              5.0.addWSpace(),
-                              InkResponse(
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 0.04 * width),
+                    child: Column(
+                      children: [
+                        (0.015 * height).addHSpace(),
+                        Row(
+                          children: [
+                            5.0.addWSpace(),
+                            InkResponse(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isHover = value;
+                                });
+                              },
+                              radius: 20,
+                              hoverColor: Colors.grey.withOpacity(0.4),
+                              child: const Icon(Icons.menu),
+                            ),
+                            (0.03 * width).addWSpace(),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 0.015 * width,
+                                  vertical: 0.003 * height),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius:
+                                    BorderRadius.circular(0.01 * height),
+                              ),
+                              child: const Icon(
+                                Icons.play_arrow,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              "YouTube",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 0.045 * width,
+                              ),
+                            ),
+                            const Spacer(),
+                            InkResponse(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isHover = value;
+                                });
+                              },
+                              radius: 20,
+                              hoverColor: Colors.grey.withOpacity(0.4),
+                              child: const Icon(Icons.search_sharp),
+                            ),
+                            (0.02 * width).addWSpace(),
+                            InkResponse(
                                 onTap: () {},
                                 onHover: (value) {
                                   setState(() {
@@ -301,252 +137,205 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 },
                                 radius: 20,
                                 hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.menu),
-                              ),
-                              (0.03 * width).addWSpace(),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 0.015 * width,
-                                    vertical: 0.003 * height),
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius:
-                                      BorderRadius.circular(0.01 * height),
-                                ),
-                                child: const Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                "YouTube",
+                                child: const Icon(Icons.mic)),
+                            (0.02 * width).addWSpace(),
+                            InkResponse(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isHover = value;
+                                });
+                              },
+                              radius: 20,
+                              hoverColor: Colors.grey.withOpacity(0.4),
+                              child: const Icon(Icons.video_call_outlined),
+                            ),
+                            (0.02 * width).addWSpace(),
+                            InkResponse(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isHover = value;
+                                });
+                              },
+                              radius: 20,
+                              hoverColor: Colors.grey.withOpacity(0.4),
+                              child: const Icon(Icons.notifications_active),
+                            ),
+                            (0.02 * width).addWSpace(),
+                            CircleAvatar(
+                              radius: 0.023 * height,
+                              backgroundColor: Colors.purple.shade300,
+                              child: const Text(
+                                "H",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 0.045 * width,
                                 ),
                               ),
-                              const Spacer(),
-                              InkResponse(
-                                onTap: () {},
+                            ),
+                          ],
+                        ),
+                        (0.015 * height).addHSpace(),
+                        SizedBox(
+                          height: 0.05 * height,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemCount: data.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    select = index;
+                                  });
+                                },
                                 onHover: (value) {
                                   setState(() {
                                     isHover = value;
                                   });
                                 },
-                                radius: 20,
-                                hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.search_sharp),
-                              ),
-                              (0.02 * width).addWSpace(),
-                              InkResponse(
-                                  onTap: () {},
-                                  onHover: (value) {
-                                    setState(() {
-                                      isHover = value;
-                                    });
-                                  },
-                                  radius: 20,
-                                  hoverColor: Colors.grey.withOpacity(0.4),
-                                  child: const Icon(Icons.mic)),
-                              (0.02 * width).addWSpace(),
-                              InkResponse(
-                                onTap: () {},
-                                onHover: (value) {
-                                  setState(() {
-                                    isHover = value;
-                                  });
-                                },
-                                radius: 20,
-                                hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.video_call_outlined),
-                              ),
-                              (0.02 * width).addWSpace(),
-                              InkResponse(
-                                onTap: () {},
-                                onHover: (value) {
-                                  setState(() {
-                                    isHover = value;
-                                  });
-                                },
-                                radius: 20,
-                                hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.notifications_active),
-                              ),
-                              (0.02 * width).addWSpace(),
-                              CircleAvatar(
-                                radius: 0.023 * height,
-                                backgroundColor: Colors.purple.shade300,
-                                child: const Text(
-                                  "H",
-                                  style: TextStyle(
-                                    color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.circular(0.01 * height),
+                                hoverColor: Colors.grey.withOpacity(0.1),
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 0.01 * width),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.05 * width,
+                                      vertical: 0.01 * height),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(0.015 * height),
+                                    color: select == index
+                                        ? Colors.white
+                                        : Colors.grey.withOpacity(0.2),
+                                  ),
+                                  child: Text(
+                                    "${data[index]}",
+                                    style: TextStyle(
+                                      color: select == index
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              );
+                            },
                           ),
-                          (0.015 * height).addHSpace(),
-                          SizedBox(
-                            height: 0.05 * height,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              itemCount: data.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      select = index;
-                                    });
-                                  },
-                                  onHover: (value) {
-                                    setState(() {
-                                      isHover = value;
-                                    });
-                                  },
-                                  borderRadius:
-                                      BorderRadius.circular(0.01 * height),
-                                  hoverColor: Colors.grey.withOpacity(0.1),
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 0.01 * width),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 0.05 * width,
-                                        vertical: 0.01 * height),
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(0.015 * height),
-                                      color: select == index
-                                          ? Colors.white
-                                          : Colors.grey.withOpacity(0.2),
-                                    ),
-                                    child: Text(
-                                      "${data[index]}",
-                                      style: TextStyle(
-                                        color: select == index
-                                            ? Colors.black
-                                            : Colors.white,
+                        ),
+                        (0.01 * height).addHSpace(),
+                        Expanded(
+                          child: ListView.builder(
+                            controller: scrollController,
+                            itemCount: videoController.allData.length,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                borderRadius: BorderRadius.circular(10),
+                                onTap: () {
+                                  setState(() {
+                                    selectVideo = index;
+                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => VideoPlayScreen(
+                                        video: index,
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          (0.01 * height).addHSpace(),
-                          Expanded(
-                            child: ListView.builder(
-                              controller: scrollController,
-                              itemCount: allData.length,
-                              padding: EdgeInsets.zero,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectVideo = index;
-                                    });
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => VideoPlayScreen(
-                                            video: allData[index]["video"],
-                                          ),
-                                        ));
-                                  },
-                                  borderRadius: BorderRadius.circular(10),
-                                  radius: 10,
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 0.015 * height,
-                                        horizontal: 0.02 * width),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 0.35 * height,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                    "${allData[index]["image"]}"),
-                                                fit: BoxFit.cover),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
+                                  );
+                                },
+                                radius: 10,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 0.015 * height,
+                                      horizontal: 0.02 * width),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 0.35 * height,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  "${videoController.allData[index]["image"]}"),
+                                              fit: BoxFit.cover),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                         ),
-                                        (0.01 * height).addHSpace(),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CircleAvatar(
-                                              radius: 0.035 * width,
-                                              backgroundImage: NetworkImage(
-                                                  "${allData[index]["logo"]}"),
-                                            ),
-                                            (0.02 * width).addWSpace(),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "${allData[index]["title"]}",
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                      ),
+                                      (0.01 * height).addHSpace(),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 0.035 * width,
+                                            backgroundImage: NetworkImage(
+                                                "${videoController.allData[index]["logo"]}"),
+                                          ),
+                                          (0.02 * width).addWSpace(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${videoController.allData[index]["title"]}",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                                Text(
-                                                  "${allData[index]["name"]}",
-                                                  style: const TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 14,
-                                                  ),
+                                              ),
+                                              Text(
+                                                "${videoController.allData[index]["name"]}",
+                                                style: const TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14,
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "${allData[index]["views"]}",
-                                                      style: const TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                    (0.015 * width).addWSpace(),
-                                                    Icon(
-                                                      Icons.circle,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "${videoController.allData[index]["views"]}",
+                                                    style: const TextStyle(
                                                       color: Colors.grey,
-                                                      size: 0.01 * height,
+                                                      fontSize: 14,
                                                     ),
-                                                    (0.015 * width).addWSpace(),
-                                                    Text(
-                                                      "${allData[index]["time"]}",
-                                                      style: const TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14,
-                                                      ),
+                                                  ),
+                                                  (0.015 * width).addWSpace(),
+                                                  Icon(
+                                                    Icons.circle,
+                                                    color: Colors.grey,
+                                                    size: 0.01 * height,
+                                                  ),
+                                                  (0.015 * width).addWSpace(),
+                                                  Text(
+                                                    "${videoController.allData[index]["time"]}",
+                                                    style: const TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 14,
                                                     ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            const Spacer(),
-                                            InkResponse(
-                                              onTap: () {},
-                                              child:
-                                                  const Icon(Icons.more_vert),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          const Spacer(),
+                                          InkResponse(
+                                            onTap: () {},
+                                            child: const Icon(Icons.more_vert),
+                                          ),
+                                        ],
+                                      )
+                                    ],
                                   ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Positioned(
@@ -960,7 +749,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                               ),
                                               padding: EdgeInsets.only(
                                                   bottom: 0.07 * height),
-                                              itemCount: allData.length,
+                                              itemCount: videoController
+                                                  .allData.length,
                                               itemBuilder: (context, index) {
                                                 return InkWell(
                                                   onTap: () {
@@ -968,15 +758,14 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                       selectVideo = index;
                                                     });
                                                     Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              VideoPlayScreen(
-                                                            video:
-                                                                allData[index]
-                                                                    ["video"],
-                                                          ),
-                                                        ));
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            VideoPlayScreen(
+                                                          video: index,
+                                                        ),
+                                                      ),
+                                                    );
                                                   },
                                                   child: Column(
                                                     children: [
@@ -990,7 +779,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                   .circular(10),
                                                           image: DecorationImage(
                                                               image: NetworkImage(
-                                                                  "${allData[index]["image"]}"),
+                                                                  "${videoController.allData[index]["image"]}"),
                                                               fit:
                                                                   BoxFit.cover),
                                                         ),
@@ -1007,7 +796,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                 0.018 * width,
                                                             backgroundImage:
                                                                 NetworkImage(
-                                                                    "${allData[index]["logo"]}"),
+                                                                    "${videoController.allData[index]["logo"]}"),
                                                           ),
                                                           (0.015 * width)
                                                               .addWSpace(),
@@ -1020,7 +809,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                 width: 0.315 *
                                                                     width,
                                                                 child: Text(
-                                                                  "${allData[index]["title"]}",
+                                                                  "${videoController.allData[index]["title"]}",
                                                                   style:
                                                                       const TextStyle(
                                                                     color: Colors
@@ -1034,7 +823,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                 ),
                                                               ),
                                                               Text(
-                                                                "${allData[index]["name"]}",
+                                                                "${videoController.allData[index]["name"]}",
                                                                 style:
                                                                     const TextStyle(
                                                                   color: Colors
@@ -1045,7 +834,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                    "${allData[index]["views"]}",
+                                                                    "${videoController.allData[index]["views"]}",
                                                                     style:
                                                                         const TextStyle(
                                                                       color: Colors
@@ -1067,7 +856,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                   (0.01 * width)
                                                                       .addWSpace(),
                                                                   Text(
-                                                                    "${allData[index]["time"]}",
+                                                                    "${videoController.allData[index]["time"]}",
                                                                     style:
                                                                         const TextStyle(
                                                                       color: Colors
@@ -1365,11 +1154,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                 child: Row(
                                                   children: [
                                                     (0.01 * width).addWSpace(),
-                                                    Icon(allData2[index]
-                                                        ["icon"]),
+                                                    Icon(
+                                                        allData[index]["icon"]),
                                                     (0.01 * width).addWSpace(),
                                                     Text(
-                                                      "${allData2[index]["name"]}",
+                                                      "${allData[index]["name"]}",
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 14,
@@ -1512,7 +1301,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                 )
                                                               : const SizedBox();
                                         },
-                                        itemCount: allData2.length,
+                                        itemCount: allData.length,
                                       ),
                                     ),
                                   ),
@@ -1585,7 +1374,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                             mainAxisExtent: 0.38 * height,
                                             crossAxisSpacing: 0.01 * width,
                                           ),
-                                          itemCount: allData.length,
+                                          itemCount:
+                                              videoController.allData.length,
                                           padding: EdgeInsets.only(
                                               bottom: 0.1 * height),
                                           itemBuilder: (context, index) {
@@ -1599,8 +1389,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         VideoPlayScreen(
-                                                      video: allData[index]
-                                                          ["video"],
+                                                      video: index,
                                                     ),
                                                   ),
                                                 );
@@ -1616,7 +1405,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               10),
                                                       image: DecorationImage(
                                                           image: NetworkImage(
-                                                              "${allData[index]["image"]}"),
+                                                              "${videoController.allData[index]["image"]}"),
                                                           fit: BoxFit.cover),
                                                     ),
                                                   ),
@@ -1630,7 +1419,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                         radius: 0.017 * width,
                                                         backgroundImage:
                                                             NetworkImage(
-                                                                "${allData[index]["logo"]}"),
+                                                                "${videoController.allData[index]["logo"]}"),
                                                       ),
                                                       (0.01 * width)
                                                           .addWSpace(),
@@ -1641,9 +1430,9 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                         children: [
                                                           SizedBox(
                                                             width:
-                                                                0.185 * width,
+                                                                0.184 * width,
                                                             child: Text(
-                                                              "${allData[index]["title"]}",
+                                                              "${videoController.allData[index]["title"]}",
                                                               style:
                                                                   const TextStyle(
                                                                 color: Colors
@@ -1656,7 +1445,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            "${allData[index]["name"]}",
+                                                            "${videoController.allData[index]["name"]}",
                                                             style:
                                                                 const TextStyle(
                                                               color:
@@ -1667,7 +1456,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                           Row(
                                                             children: [
                                                               Text(
-                                                                "${allData[index]["views"]}",
+                                                                "${videoController.allData[index]["views"]}",
                                                                 style:
                                                                     const TextStyle(
                                                                   color: Colors
@@ -1687,7 +1476,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                               (0.01 * width)
                                                                   .addWSpace(),
                                                               Text(
-                                                                "${allData[index]["time"]}",
+                                                                "${videoController.allData[index]["time"]}",
                                                                 style:
                                                                     const TextStyle(
                                                                   color: Colors
