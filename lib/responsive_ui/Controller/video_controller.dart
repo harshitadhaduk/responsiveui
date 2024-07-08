@@ -114,7 +114,7 @@ class VideoController extends GetxController {
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
     },
   ];
-  List<VideoPlayerController?> videoData = [];
+  // List<VideoPlayerController?> videoData = [];
   VideoPlayerController? video;
   var selectVideo = 0.obs;
   var select = 0.obs;
@@ -130,16 +130,16 @@ class VideoController extends GetxController {
     videoPlay();
   }
 
-  Future<void> initializedVideo() async {
-    for (int i = 0; i < allData.length; i++) {
-      var url = allData[i]["video"];
-      var controller = VideoPlayerController.networkUrl(Uri.parse("$url"));
-      await controller.initialize();
-      videoData.add(controller);
-    }
-    print(videoData);
-    update();
-  }
+  // Future<void> initializedVideo() async {
+  //   for (int i = 0; i < allData.length; i++) {
+  //     var url = allData[i]["video"];
+  //     var controller = VideoPlayerController.networkUrl(Uri.parse("$url"));
+  //     await controller.initialize();
+  //     videoData.add(controller);
+  //   }
+  //   print(videoData);
+  //   update();
+  // }
 
   Future<void> videoPlay() async {
     var videoUrl = allData[selectVideo.value]["video"];

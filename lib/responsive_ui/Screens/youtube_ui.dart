@@ -66,9 +66,12 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
           : Stack(
               alignment: Alignment.center,
               children: [
-                SizedBox(
+                Container(
                   height: 0.2 * height,
                   width: 0.4 * width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: VideoPlayer(videoController.video!),
                 ),
                 InkResponse(
@@ -204,7 +207,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   },
                                   borderRadius:
                                       BorderRadius.circular(0.01 * height),
-                                  hoverColor: Colors.grey.withOpacity(0.1),
+                                  hoverColor: Colors.grey.withOpacity(0.2),
                                   child: Obx(
                                     () => Container(
                                       margin: EdgeInsets.symmetric(
@@ -353,28 +356,15 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    left: 0.97 * width,
-                    right: 0.0 * width,
-                    child: InkResponse(
-                      onTap: () {
-                        videoController.scrollController.jumpTo(
-                            videoController.scrollController.offset - 70);
-                      },
-                      child: Icon(Icons.arrow_drop_up, size: 0.04 * width),
-                    ),
-                  ),
-                  Positioned(
+                  UpCommonButton(
+                      left: 0.97 * width,
+                      right: 0.0 * width,
+                      iconSize: 0.04 * width),
+                  DownCommonButton(
                     bottom: 0,
                     left: 0.97 * width,
                     right: 0.0 * width,
-                    child: InkResponse(
-                      onTap: () {
-                        videoController.scrollController.jumpTo(
-                            videoController.scrollController.offset + 70);
-                      },
-                      child: Icon(Icons.arrow_drop_down, size: 0.04 * width),
-                    ),
+                    iconSize: 0.04 * width,
                   ),
                 ],
               )
@@ -701,7 +691,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                   borderRadius:
                                                       BorderRadius.circular(10),
                                                   hoverColor: Colors.grey
-                                                      .withOpacity(0.1),
+                                                      .withOpacity(0.2),
                                                   child: Obx(
                                                     () => Container(
                                                       margin:
@@ -905,32 +895,16 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                           ),
                         ),
                       ),
-                      Positioned(
+                      UpCommonButton(
                         left: 0.978 * width,
                         right: 0.0 * width,
-                        child: InkResponse(
-                          onTap: () {
-                            videoController.scrollController.jumpTo(
-                                videoController.scrollController.offset - 70);
-                          },
-                          child: Icon(
-                            Icons.arrow_drop_up,
-                            size: 0.032 * width,
-                          ),
-                        ),
+                        iconSize: 0.032 * width,
                       ),
-                      Positioned(
+                      DownCommonButton(
                         bottom: 0,
                         left: 0.978 * width,
                         right: 0.0 * width,
-                        child: InkResponse(
-                          onTap: () {
-                            videoController.scrollController.jumpTo(
-                                videoController.scrollController.offset + 70);
-                          },
-                          child:
-                              Icon(Icons.arrow_drop_down, size: 0.032 * width),
-                        ),
+                        iconSize: 0.032 * width,
                       ),
                     ],
                   )
@@ -1343,7 +1317,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                   BorderRadius.circular(
                                                       0.01 * height),
                                               hoverColor:
-                                                  Colors.grey.withOpacity(0.1),
+                                                  Colors.grey.withOpacity(0.2),
                                               child: Obx(
                                                 () => Container(
                                                   margin: EdgeInsets.symmetric(
@@ -1529,36 +1503,98 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                           ],
                         ),
                       ),
-                      Positioned(
-                        left: 201,
+                      UpCommonButton(
+                        left: 200,
                         top: 0.08 * height,
-                        child: InkResponse(
-                          onTap: () {
-                            videoController.scrollController.jumpTo(
-                                videoController.scrollController.offset - 70);
-                          },
-                          child: Icon(
-                            Icons.arrow_drop_up,
-                            size: 0.014 * width,
-                          ),
-                        ),
+                        iconSize: 0.014 * width,
                       ),
-                      Positioned(
+                      DownCommonButton(
                         bottom: 0,
-                        left: 201,
-                        child: InkResponse(
-                          onTap: () {
-                            videoController.scrollController.jumpTo(
-                                videoController.scrollController.offset + 70);
-                          },
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            size: 0.014 * width,
-                          ),
-                        ),
+                        left: 200,
+                        iconSize: 0.014 * width,
                       ),
                     ],
                   ),
+      ),
+    );
+  }
+}
+
+class UpCommonButton extends StatefulWidget {
+  final top;
+  final bottom;
+  final left;
+  final right;
+  final iconSize;
+
+  const UpCommonButton({
+    super.key,
+    this.top,
+    this.bottom,
+    this.left,
+    this.right,
+    this.iconSize,
+  });
+
+  @override
+  State<UpCommonButton> createState() => _UpCommonButtonState();
+}
+
+class _UpCommonButtonState extends State<UpCommonButton> {
+  VideoController videoController = Get.put(VideoController());
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: widget.left,
+      top: widget.top,
+      bottom: widget.bottom,
+      right: widget.right,
+      child: InkResponse(
+        onTap: () {
+          videoController.scrollController
+              .jumpTo(videoController.scrollController.offset - 70);
+        },
+        child: Icon(
+          Icons.arrow_drop_up,
+          size: widget.iconSize,
+        ),
+      ),
+    );
+  }
+}
+
+class DownCommonButton extends StatefulWidget {
+  final top;
+  final bottom;
+  final left;
+  final right;
+  final iconSize;
+  const DownCommonButton(
+      {super.key, this.top, this.bottom, this.left, this.right, this.iconSize});
+
+  @override
+  State<DownCommonButton> createState() => _DownCommonButtonState();
+}
+
+class _DownCommonButtonState extends State<DownCommonButton> {
+  VideoController videoController = Get.put(VideoController());
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    return Positioned(
+      bottom: widget.bottom,
+      left: widget.left,
+      top: widget.top,
+      right: widget.right,
+      child: InkResponse(
+        onTap: () {
+          videoController.scrollController
+              .jumpTo(videoController.scrollController.offset + 70);
+        },
+        child: Icon(
+          Icons.arrow_drop_down,
+          size: widget.iconSize,
+        ),
       ),
     );
   }
