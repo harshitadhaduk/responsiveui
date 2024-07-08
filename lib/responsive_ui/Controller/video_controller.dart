@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoController extends GetxController {
   var isHover = false.obs;
-
   List<Map<String, dynamic>> allData = [
     {
       "name": "Ripples Code",
@@ -116,22 +115,46 @@ class VideoController extends GetxController {
     },
   ];
   List<VideoPlayerController?> videoData = [];
+  VideoPlayerController? video;
+  var selectVideo = 0.obs;
+  var select = 0.obs;
+  var selectFunction = 0.obs;
+  late ScrollController scrollController;
+  late ScrollController scrollController2;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
-    initializedVideo();
+    scrollController = ScrollController();
+    scrollController2 = ScrollController();
+    videoPlay();
   }
 
   Future<void> initializedVideo() async {
     for (int i = 0; i < allData.length; i++) {
       var url = allData[i]["video"];
-      var controller = VideoPlayerController.network(url);
+      var controller = VideoPlayerController.networkUrl(Uri.parse("$url"));
       await controller.initialize();
       videoData.add(controller);
-      print("$videoData");
     }
+    print(videoData);
     update();
+  }
+
+  Future<void> videoPlay() async {
+    var videoUrl = allData[selectVideo.value]["video"];
+    var videoController = VideoPlayerController.networkUrl(Uri.parse(videoUrl));
+    await videoController.initialize();
+    video = videoController;
+    print("$video");
+    update();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    scrollController.dispose();
+    scrollController2.dispose();
+    video!.dispose();
   }
 }

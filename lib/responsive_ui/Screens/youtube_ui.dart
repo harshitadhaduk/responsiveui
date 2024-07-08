@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_ui/responsive_ui/Controller/video_controller.dart';
 import 'package:responsive_ui/responsive_ui/Screens/video_play_screen.dart';
-
 import 'package:responsive_ui/responsive_ui/general/sized_box.dart';
-
-import '../general/show_video.dart';
+import 'package:video_player/video_player.dart';
 
 class YoutubeUiScreen extends StatefulWidget {
   const YoutubeUiScreen({super.key});
@@ -26,7 +24,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     "Jukebox",
     "Indian soap operas",
   ];
-  List<Map<String, dynamic>> allData = [
+  List<Map<String, dynamic>> sideMenuData = [
     {"icon": Icons.home, "name": "Home"},
     {"icon": Icons.send, "name": "Shorts"},
     {"icon": Icons.subscriptions, "name": "Subscription"},
@@ -54,288 +52,305 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     {"icon": Icons.help_center_outlined, "name": "Send FeedBack"},
     {"icon": Icons.abc, "name": ""},
   ];
-  ScrollController scrollController = ScrollController();
-  ScrollController scrollController2 = ScrollController();
-  bool isHover = false;
   int selectVideo = -1;
-  int select = 0;
-  int selectFunction = 0;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    videoController.selectVideo.value;
     return Scaffold(
       backgroundColor: Colors.black,
       floatingActionButton: selectVideo == -1
           ? const SizedBox()
-          : ShowVideo(index: videoController.videoData[selectVideo]),
+          : Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: 0.2 * height,
+                  width: 0.4 * width,
+                  child: VideoPlayer(videoController.video!),
+                ),
+                InkResponse(
+                  onTap: () {
+                    setState(() {
+                      videoController.video!.value.isPlaying
+                          ? videoController.video!.pause()
+                          : videoController.video!.play();
+                    });
+                  },
+                  child: Icon(
+                    videoController.video!.value.isPlaying
+                        ? Icons.pause
+                        : Icons.play_arrow,
+                  ),
+                ),
+              ],
+            ),
       body: SafeArea(
         child: width <= 600
             ? Stack(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 0.04 * width),
-                    child: Column(
-                      children: [
-                        (0.015 * height).addHSpace(),
-                        Row(
-                          children: [
-                            5.0.addWSpace(),
-                            InkResponse(
-                              onTap: () {},
-                              onHover: (value) {
-                                setState(() {
-                                  isHover = value;
-                                });
-                              },
-                              radius: 20,
-                              hoverColor: Colors.grey.withOpacity(0.4),
-                              child: const Icon(Icons.menu),
-                            ),
-                            (0.03 * width).addWSpace(),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 0.015 * width,
-                                  vertical: 0.003 * height),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius:
-                                    BorderRadius.circular(0.01 * height),
-                              ),
-                              child: const Icon(
-                                Icons.play_arrow,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              "YouTube",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 0.045 * width,
-                              ),
-                            ),
-                            const Spacer(),
-                            InkResponse(
-                              onTap: () {},
-                              onHover: (value) {
-                                setState(() {
-                                  isHover = value;
-                                });
-                              },
-                              radius: 20,
-                              hoverColor: Colors.grey.withOpacity(0.4),
-                              child: const Icon(Icons.search_sharp),
-                            ),
-                            (0.02 * width).addWSpace(),
-                            InkResponse(
+                  RawScrollbar(
+                    controller: videoController.scrollController,
+                    thumbColor: Colors.grey,
+                    thickness: 0.018 * width,
+                    padding: EdgeInsets.only(top: 0.022 * height),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 0.04 * width),
+                      child: Column(
+                        children: [
+                          (0.015 * height).addHSpace(),
+                          Row(
+                            children: [
+                              5.0.addWSpace(),
+                              InkResponse(
                                 onTap: () {},
                                 onHover: (value) {
-                                  setState(() {
-                                    isHover = value;
-                                  });
+                                  videoController.isHover.value = value;
                                 },
                                 radius: 20,
                                 hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.mic)),
-                            (0.02 * width).addWSpace(),
-                            InkResponse(
-                              onTap: () {},
-                              onHover: (value) {
-                                setState(() {
-                                  isHover = value;
-                                });
-                              },
-                              radius: 20,
-                              hoverColor: Colors.grey.withOpacity(0.4),
-                              child: const Icon(Icons.video_call_outlined),
-                            ),
-                            (0.02 * width).addWSpace(),
-                            InkResponse(
-                              onTap: () {},
-                              onHover: (value) {
-                                setState(() {
-                                  isHover = value;
-                                });
-                              },
-                              radius: 20,
-                              hoverColor: Colors.grey.withOpacity(0.4),
-                              child: const Icon(Icons.notifications_active),
-                            ),
-                            (0.02 * width).addWSpace(),
-                            CircleAvatar(
-                              radius: 0.023 * height,
-                              backgroundColor: Colors.purple.shade300,
-                              child: const Text(
-                                "H",
-                                style: TextStyle(
+                                child: const Icon(Icons.menu),
+                              ),
+                              (0.03 * width).addWSpace(),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 0.015 * width,
+                                    vertical: 0.003 * height),
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius:
+                                      BorderRadius.circular(0.01 * height),
+                                ),
+                                child: const Icon(
+                                  Icons.play_arrow,
                                   color: Colors.white,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        (0.015 * height).addHSpace(),
-                        SizedBox(
-                          height: 0.05 * height,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            itemCount: data.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    select = index;
-                                  });
-                                },
+                              Text(
+                                "YouTube",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 0.045 * width,
+                                ),
+                              ),
+                              const Spacer(),
+                              InkResponse(
+                                onTap: () {},
                                 onHover: (value) {
-                                  setState(() {
-                                    isHover = value;
-                                  });
+                                  videoController.isHover.value = value;
                                 },
-                                borderRadius:
-                                    BorderRadius.circular(0.01 * height),
-                                hoverColor: Colors.grey.withOpacity(0.1),
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 0.01 * width),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 0.05 * width,
-                                      vertical: 0.01 * height),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(0.015 * height),
-                                    color: select == index
-                                        ? Colors.white
-                                        : Colors.grey.withOpacity(0.2),
-                                  ),
-                                  child: Text(
-                                    "${data[index]}",
-                                    style: TextStyle(
-                                      color: select == index
-                                          ? Colors.black
-                                          : Colors.white,
-                                    ),
+                                radius: 20,
+                                hoverColor: Colors.grey.withOpacity(0.4),
+                                child: const Icon(Icons.search_sharp),
+                              ),
+                              (0.02 * width).addWSpace(),
+                              InkResponse(
+                                  onTap: () {},
+                                  onHover: (value) {
+                                    videoController.isHover.value = value;
+                                  },
+                                  radius: 20,
+                                  hoverColor: Colors.grey.withOpacity(0.4),
+                                  child: const Icon(Icons.mic)),
+                              (0.02 * width).addWSpace(),
+                              InkResponse(
+                                onTap: () {},
+                                onHover: (value) {
+                                  videoController.isHover.value = value;
+                                },
+                                radius: 20,
+                                hoverColor: Colors.grey.withOpacity(0.4),
+                                child: const Icon(Icons.video_call_outlined),
+                              ),
+                              (0.02 * width).addWSpace(),
+                              InkResponse(
+                                onTap: () {},
+                                onHover: (value) {
+                                  videoController.isHover.value = value;
+                                },
+                                radius: 20,
+                                hoverColor: Colors.grey.withOpacity(0.4),
+                                child: const Icon(Icons.notifications_active),
+                              ),
+                              (0.02 * width).addWSpace(),
+                              CircleAvatar(
+                                radius: 0.023 * height,
+                                backgroundColor: Colors.purple.shade300,
+                                child: const Text(
+                                  "H",
+                                  style: TextStyle(
+                                    color: Colors.white,
                                   ),
                                 ),
-                              );
-                            },
+                              ),
+                            ],
                           ),
-                        ),
-                        (0.01 * height).addHSpace(),
-                        Expanded(
-                          child: ListView.builder(
-                            controller: scrollController,
-                            itemCount: videoController.allData.length,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                borderRadius: BorderRadius.circular(10),
-                                onTap: () {
-                                  setState(() {
-                                    selectVideo = index;
-                                  });
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => VideoPlayScreen(
-                                        video: index,
+                          (0.015 * height).addHSpace(),
+                          SizedBox(
+                            height: 0.05 * height,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                                    videoController.select.value = index;
+                                  },
+                                  onHover: (value) {
+                                    videoController.isHover.value = value;
+                                  },
+                                  borderRadius:
+                                      BorderRadius.circular(0.01 * height),
+                                  hoverColor: Colors.grey.withOpacity(0.1),
+                                  child: Obx(
+                                    () => Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 0.01 * width),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 0.05 * width,
+                                          vertical: 0.01 * height),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            0.015 * height),
+                                        color: videoController.select.value ==
+                                                index
+                                            ? Colors.white
+                                            : Colors.grey.withOpacity(0.2),
                                       ),
-                                    ),
-                                  );
-                                },
-                                radius: 10,
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: 0.015 * height,
-                                      horizontal: 0.02 * width),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 0.35 * height,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "${videoController.allData[index]["image"]}"),
-                                              fit: BoxFit.cover),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
+                                      child: Text(
+                                        "${data[index]}",
+                                        style: TextStyle(
+                                          color: videoController.select.value ==
+                                                  index
+                                              ? Colors.black
+                                              : Colors.white,
                                         ),
                                       ),
-                                      (0.01 * height).addHSpace(),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 0.035 * width,
-                                            backgroundImage: NetworkImage(
-                                                "${videoController.allData[index]["logo"]}"),
-                                          ),
-                                          (0.02 * width).addWSpace(),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "${videoController.allData[index]["title"]}",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                "${videoController.allData[index]["name"]}",
-                                                style: const TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "${videoController.allData[index]["views"]}",
-                                                    style: const TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                  (0.015 * width).addWSpace(),
-                                                  Icon(
-                                                    Icons.circle,
-                                                    color: Colors.grey,
-                                                    size: 0.01 * height,
-                                                  ),
-                                                  (0.015 * width).addWSpace(),
-                                                  Text(
-                                                    "${videoController.allData[index]["time"]}",
-                                                    style: const TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          const Spacer(),
-                                          InkResponse(
-                                            onTap: () {},
-                                            child: const Icon(Icons.more_vert),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                          (0.01 * height).addHSpace(),
+                          Expanded(
+                            child: ListView.builder(
+                              controller: videoController.scrollController,
+                              itemCount: videoController.allData.length,
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  borderRadius: BorderRadius.circular(10),
+                                  onTap: () {
+                                    setState(() {
+                                      selectVideo = index;
+                                    });
+                                    videoController.selectVideo.value = index;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => VideoPlayScreen(
+                                          video: index,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  radius: 10,
+                                  child: Container(
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 0.015 * height,
+                                        horizontal: 0.02 * width),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 0.35 * height,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    "${videoController.allData[index]["image"]}"),
+                                                fit: BoxFit.cover),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                        (0.01 * height).addHSpace(),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 0.035 * width,
+                                              backgroundImage: NetworkImage(
+                                                  "${videoController.allData[index]["logo"]}"),
+                                            ),
+                                            (0.02 * width).addWSpace(),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${videoController.allData[index]["title"]}",
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "${videoController.allData[index]["name"]}",
+                                                  style: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "${videoController.allData[index]["views"]}",
+                                                      style: const TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                    (0.015 * width).addWSpace(),
+                                                    Icon(
+                                                      Icons.circle,
+                                                      color: Colors.grey,
+                                                      size: 0.01 * height,
+                                                    ),
+                                                    (0.015 * width).addWSpace(),
+                                                    Text(
+                                                      "${videoController.allData[index]["time"]}",
+                                                      style: const TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            const Spacer(),
+                                            InkResponse(
+                                              onTap: () {},
+                                              child:
+                                                  const Icon(Icons.more_vert),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Positioned(
@@ -343,9 +358,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                     right: 0.0 * width,
                     child: InkResponse(
                       onTap: () {
-                        setState(() {
-                          scrollController.jumpTo(scrollController.offset - 70);
-                        });
+                        videoController.scrollController.jumpTo(
+                            videoController.scrollController.offset - 70);
                       },
                       child: Icon(Icons.arrow_drop_up, size: 0.04 * width),
                     ),
@@ -356,9 +370,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                     right: 0.0 * width,
                     child: InkResponse(
                       onTap: () {
-                        setState(() {
-                          scrollController.jumpTo(scrollController.offset + 70);
-                        });
+                        videoController.scrollController.jumpTo(
+                            videoController.scrollController.offset + 70);
                       },
                       child: Icon(Icons.arrow_drop_down, size: 0.04 * width),
                     ),
@@ -371,7 +384,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                       SingleChildScrollView(
                         physics: const NeverScrollableScrollPhysics(),
                         child: RawScrollbar(
-                          controller: scrollController,
+                          controller: videoController.scrollController,
                           thumbVisibility: true,
                           thickness: 0.012 * width,
                           thumbColor: Colors.grey,
@@ -388,9 +401,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     InkResponse(
                                       onTap: () {},
                                       onHover: (value) {
-                                        setState(() {
-                                          isHover = value;
-                                        });
+                                        videoController.isHover.value = value;
                                       },
                                       radius: 20,
                                       hoverColor: Colors.grey.withOpacity(0.4),
@@ -487,9 +498,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     InkResponse(
                                       onTap: () {},
                                       onHover: (value) {
-                                        setState(() {
-                                          isHover = value;
-                                        });
+                                        videoController.isHover.value = value;
                                       },
                                       radius: 20,
                                       hoverColor: Colors.grey.withOpacity(0.4),
@@ -505,9 +514,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     InkResponse(
                                       onTap: () {},
                                       onHover: (value) {
-                                        setState(() {
-                                          isHover = value;
-                                        });
+                                        videoController.isHover.value = value;
                                       },
                                       radius: 20,
                                       hoverColor: Colors.grey.withOpacity(0.4),
@@ -518,9 +525,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     InkResponse(
                                       onTap: () {},
                                       onHover: (value) {
-                                        setState(() {
-                                          isHover = value;
-                                        });
+                                        videoController.isHover.value = value;
                                       },
                                       radius: 20,
                                       hoverColor: Colors.grey.withOpacity(0.4),
@@ -552,9 +557,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           InkWell(
                                             onTap: () {},
                                             onHover: (value) {
-                                              setState(() {
-                                                isHover = value;
-                                              });
+                                              videoController.isHover.value =
+                                                  value;
                                             },
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -582,9 +586,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           InkWell(
                                             onTap: () {},
                                             onHover: (value) {
-                                              setState(() {
-                                                isHover = value;
-                                              });
+                                              videoController.isHover.value =
+                                                  value;
                                             },
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -611,9 +614,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           InkWell(
                                             onTap: () {},
                                             onHover: (value) {
-                                              setState(() {
-                                                isHover = value;
-                                              });
+                                              videoController.isHover.value =
+                                                  value;
                                             },
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -641,9 +643,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           InkWell(
                                             onTap: () {},
                                             onHover: (value) {
-                                              setState(() {
-                                                isHover = value;
-                                              });
+                                              videoController.isHover.value =
+                                                  value;
                                             },
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -690,45 +691,52 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                               itemBuilder: (context, index) {
                                                 return InkWell(
                                                   onTap: () {
-                                                    setState(() {
-                                                      select = index;
-                                                    });
+                                                    videoController
+                                                        .select.value = index;
                                                   },
                                                   onHover: (value) {
-                                                    setState(() {
-                                                      isHover = value;
-                                                    });
+                                                    videoController
+                                                        .isHover.value = value;
                                                   },
                                                   borderRadius:
                                                       BorderRadius.circular(10),
                                                   hoverColor: Colors.grey
                                                       .withOpacity(0.1),
-                                                  child: Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal:
-                                                                0.01 * width),
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal:
-                                                                0.02 * width,
-                                                            vertical:
-                                                                0.01 * height),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color: select == index
-                                                          ? Colors.white
-                                                          : Colors.grey
-                                                              .withOpacity(0.2),
-                                                    ),
-                                                    child: Text(
-                                                      "${data[index]}",
-                                                      style: TextStyle(
-                                                        color: select == index
-                                                            ? Colors.black
-                                                            : Colors.white,
+                                                  child: Obx(
+                                                    () => Container(
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal:
+                                                                  0.01 * width),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal:
+                                                                  0.02 * width,
+                                                              vertical: 0.01 *
+                                                                  height),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color: videoController
+                                                                    .select
+                                                                    .value ==
+                                                                index
+                                                            ? Colors.white
+                                                            : Colors.grey
+                                                                .withOpacity(
+                                                                    0.2),
+                                                      ),
+                                                      child: Text(
+                                                        "${data[index]}",
+                                                        style: TextStyle(
+                                                          color: videoController
+                                                                      .select
+                                                                      .value ==
+                                                                  index
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -739,7 +747,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           (0.01 * height).addHSpace(),
                                           Expanded(
                                             child: GridView.builder(
-                                              controller: scrollController,
+                                              controller: videoController
+                                                  .scrollController,
                                               gridDelegate:
                                                   SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 2,
@@ -757,6 +766,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                     setState(() {
                                                       selectVideo = index;
                                                     });
+                                                    videoController.selectVideo
+                                                        .value = index;
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -899,10 +910,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         right: 0.0 * width,
                         child: InkResponse(
                           onTap: () {
-                            setState(() {
-                              scrollController
-                                  .jumpTo(scrollController.offset - 70);
-                            });
+                            videoController.scrollController.jumpTo(
+                                videoController.scrollController.offset - 70);
                           },
                           child: Icon(
                             Icons.arrow_drop_up,
@@ -916,10 +925,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         right: 0.0 * width,
                         child: InkResponse(
                           onTap: () {
-                            setState(() {
-                              scrollController
-                                  .jumpTo(scrollController.offset + 70);
-                            });
+                            videoController.scrollController.jumpTo(
+                                videoController.scrollController.offset + 70);
                           },
                           child:
                               Icon(Icons.arrow_drop_down, size: 0.032 * width),
@@ -943,9 +950,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   InkResponse(
                                     onTap: () {},
                                     onHover: (value) {
-                                      setState(() {
-                                        isHover = value;
-                                      });
+                                      videoController.isHover.value = value;
                                     },
                                     radius: 20,
                                     hoverColor: Colors.grey.withOpacity(0.4),
@@ -1041,9 +1046,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   InkResponse(
                                     onTap: () {},
                                     onHover: (value) {
-                                      setState(() {
-                                        isHover = value;
-                                      });
+                                      videoController.isHover.value = value;
                                     },
                                     radius: 20,
                                     hoverColor: Colors.grey.withOpacity(0.4),
@@ -1061,9 +1064,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   InkResponse(
                                     onTap: () {},
                                     onHover: (value) {
-                                      setState(() {
-                                        isHover = value;
-                                      });
+                                      videoController.isHover.value = value;
                                     },
                                     radius: 20,
                                     hoverColor: Colors.grey.withOpacity(0.4),
@@ -1074,9 +1075,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   InkResponse(
                                     onTap: () {},
                                     onHover: (value) {
-                                      setState(() {
-                                        isHover = value;
-                                      });
+                                      videoController.isHover.value = value;
                                     },
                                     radius: 20,
                                     hoverColor: Colors.grey.withOpacity(0.4),
@@ -1109,62 +1108,73 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   child: InkWell(
                                     onTap: () {},
                                     onHover: (value) {
-                                      setState(() {
-                                        isHover = value;
-                                      });
+                                      videoController.isHover.value = value;
                                     },
                                     child: RawScrollbar(
-                                      controller: scrollController,
+                                      controller:
+                                          videoController.scrollController,
                                       thumbColor: Colors.grey,
                                       thickness: 0.006 * width,
-                                      thumbVisibility: isHover ? true : false,
+                                      thumbVisibility:
+                                          videoController.isHover.value
+                                              ? true
+                                              : false,
                                       padding: EdgeInsets.only(
                                           top: 0.012 * height,
                                           bottom: 0.07 * height),
                                       child: ListView.separated(
-                                        controller: scrollController,
+                                        controller:
+                                            videoController.scrollController,
                                         itemBuilder: (context, index) {
                                           return Padding(
                                             padding: const EdgeInsets.only(
                                                 right: 15),
                                             child: InkWell(
                                               onTap: () {
-                                                setState(() {
-                                                  selectFunction = index;
-                                                });
+                                                videoController.selectFunction
+                                                    .value = index;
                                               },
                                               onHover: (value) {
-                                                isHover = value;
+                                                videoController.isHover.value =
+                                                    value;
                                               },
                                               hoverColor:
                                                   Colors.grey.withOpacity(0.4),
                                               borderRadius:
                                                   BorderRadius.circular(5),
-                                              child: Container(
-                                                height: 45,
-                                                width: 110,
-                                                decoration: BoxDecoration(
-                                                  color: selectFunction == index
-                                                      ? Colors.grey
-                                                          .withOpacity(0.4)
-                                                      : Colors.transparent,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    (0.01 * width).addWSpace(),
-                                                    Icon(
-                                                        allData[index]["icon"]),
-                                                    (0.01 * width).addWSpace(),
-                                                    Text(
-                                                      "${allData[index]["name"]}",
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14,
+                                              child: Obx(
+                                                () => Container(
+                                                  height: 45,
+                                                  width: 110,
+                                                  decoration: BoxDecoration(
+                                                    color: videoController
+                                                                .selectFunction
+                                                                .value ==
+                                                            index
+                                                        ? Colors.grey
+                                                            .withOpacity(0.4)
+                                                        : Colors.transparent,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      (0.01 * width)
+                                                          .addWSpace(),
+                                                      Icon(sideMenuData[index]
+                                                          ["icon"]),
+                                                      (0.01 * width)
+                                                          .addWSpace(),
+                                                      Text(
+                                                        "${sideMenuData[index]["name"]}",
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -1301,7 +1311,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                                 )
                                                               : const SizedBox();
                                         },
-                                        itemCount: allData.length,
+                                        itemCount: sideMenuData.length,
                                       ),
                                     ),
                                   ),
@@ -1322,41 +1332,47 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           itemBuilder: (context, index) {
                                             return InkWell(
                                               onTap: () {
-                                                setState(() {
-                                                  select = index;
-                                                });
+                                                videoController.select.value =
+                                                    index;
                                               },
                                               onHover: (value) {
-                                                setState(() {
-                                                  isHover = value;
-                                                });
+                                                videoController.isHover.value =
+                                                    value;
                                               },
                                               borderRadius:
                                                   BorderRadius.circular(
                                                       0.01 * height),
                                               hoverColor:
                                                   Colors.grey.withOpacity(0.1),
-                                              child: Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal: 0.005 * width),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 0.02 * width,
-                                                    vertical: 0.01 * height),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          0.015 * height),
-                                                  color: select == index
-                                                      ? Colors.white
-                                                      : Colors.grey
-                                                          .withOpacity(0.2),
-                                                ),
-                                                child: Text(
-                                                  "${data[index]}",
-                                                  style: TextStyle(
-                                                    color: select == index
-                                                        ? Colors.black
-                                                        : Colors.white,
+                                              child: Obx(
+                                                () => Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          0.005 * width),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 0.02 * width,
+                                                      vertical: 0.01 * height),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            0.015 * height),
+                                                    color: videoController
+                                                                .select.value ==
+                                                            index
+                                                        ? Colors.white
+                                                        : Colors.grey
+                                                            .withOpacity(0.2),
+                                                  ),
+                                                  child: Text(
+                                                    "${data[index]}",
+                                                    style: TextStyle(
+                                                      color: videoController
+                                                                  .select
+                                                                  .value ==
+                                                              index
+                                                          ? Colors.black
+                                                          : Colors.white,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -1367,7 +1383,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       (0.015 * height).addHSpace(),
                                       Expanded(
                                         child: GridView.builder(
-                                          controller: scrollController2,
+                                          controller:
+                                              videoController.scrollController2,
                                           gridDelegate:
                                               SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 3,
@@ -1384,6 +1401,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                 setState(() {
                                                   selectVideo = index;
                                                 });
+                                                videoController
+                                                    .selectVideo.value = index;
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -1515,10 +1534,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         top: 0.08 * height,
                         child: InkResponse(
                           onTap: () {
-                            setState(() {
-                              scrollController
-                                  .jumpTo(scrollController.offset - 70);
-                            });
+                            videoController.scrollController.jumpTo(
+                                videoController.scrollController.offset - 70);
                           },
                           child: Icon(
                             Icons.arrow_drop_up,
@@ -1531,10 +1548,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                         left: 201,
                         child: InkResponse(
                           onTap: () {
-                            setState(() {
-                              scrollController
-                                  .jumpTo(scrollController.offset + 70);
-                            });
+                            videoController.scrollController.jumpTo(
+                                videoController.scrollController.offset + 70);
                           },
                           child: Icon(
                             Icons.arrow_drop_down,

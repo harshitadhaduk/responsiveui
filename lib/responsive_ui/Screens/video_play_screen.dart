@@ -13,65 +13,45 @@ class VideoPlayScreen extends StatefulWidget {
 
 class _VideoPlayScreenState extends State<VideoPlayScreen> {
   VideoController videoController = Get.put(VideoController());
+
   @override
   void initState() {
     super.initState();
-    videoController.initializedVideo();
+    videoController.videoPlay();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          height: 200,
-          width: 400,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
-          ),
-          child: VideoPlayer(videoController.videoData[widget.video]!),
+        child: GetBuilder<VideoController>(
+          builder: (controller) {
+            return Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: 300,
+                  width: 500,
+                  child: VideoPlayer(controller.video!),
+                ),
+                InkResponse(
+                  onTap: () {
+                    setState(() {
+                      controller.video!.value.isPlaying
+                          ? controller.video!.pause()
+                          : controller.video!.play();
+                    });
+                  },
+                  child: Icon(
+                    controller.video!.value.isPlaying
+                        ? Icons.pause
+                        : Icons.play_arrow,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
-        // child: GetBuilder<VideoController>(
-        //   init: VideoController(),
-        //   builder: (controller) => ShowVideo(
-        //     index: controller.videoData[widget.video],
-        //   ),
-        //   //     Stack(
-        //   //   alignment: Alignment.center,
-        //   //   children: [
-        //   //     // VideoPlayer(controller.videoData[widget.video]),
-        //   //     // InkResponse(
-        //   //     //   onTap: () {
-        //   //     //     setState(() {
-        //   //     //       controller.videoData[widget.video].value.isPlaying
-        //   //     //           ? controller.videoData[widget.video].pause()
-        //   //     //           : controller.videoData[widget.video].play();
-        //   //     //     });
-        //   //     //   },
-        //   //     //   child: Icon(
-        //   //     //     controller.videoData[widget.video].value.isPlaying
-        //   //     //         ? Icons.pause
-        //   //     //         : Icons.play_arrow,
-        //   //     //   ),
-        //   //     // ),
-        //   //     VideoPlayer(controller.videoData[0]),
-        //   //     InkResponse(
-        //   //       onTap: () {
-        //   //         setState(() {
-        //   //           controller.videoData[0].value.isPlaying
-        //   //               ? controller.videoData[0].pause()
-        //   //               : controller.videoData[0].play();
-        //   //         });
-        //   //       },
-        //   //       child: Icon(
-        //   //         controller.videoData[0].value.isPlaying
-        //   //             ? Icons.pause
-        //   //             : Icons.play_arrow,
-        //   //       ),
-        //   //     ),
-        //   //   ],
-        //   // ),
-        // ),
       ),
     );
   }
