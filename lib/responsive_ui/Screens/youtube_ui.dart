@@ -61,7 +61,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    videoController.selectVideo.value;
     return Scaffold(
       backgroundColor: Colors.black,
       floatingActionButton: selectVideo == -1
