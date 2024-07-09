@@ -136,34 +136,13 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                               const Spacer(),
                               const FirstCommonButton(icon: Icons.search_sharp),
                               (0.02 * width).addWSpace(),
-                              InkResponse(
-                                  onTap: () {},
-                                  onHover: (value) {
-                                    videoController.isHover.value = value;
-                                  },
-                                  radius: 20,
-                                  hoverColor: Colors.grey.withOpacity(0.4),
-                                  child: const Icon(Icons.mic)),
+                              const FirstCommonButton(icon: Icons.mic),
                               (0.02 * width).addWSpace(),
-                              InkResponse(
-                                onTap: () {},
-                                onHover: (value) {
-                                  videoController.isHover.value = value;
-                                },
-                                radius: 20,
-                                hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.video_call_outlined),
-                              ),
+                              const FirstCommonButton(
+                                  icon: Icons.video_call_outlined),
                               (0.02 * width).addWSpace(),
-                              InkResponse(
-                                onTap: () {},
-                                onHover: (value) {
-                                  videoController.isHover.value = value;
-                                },
-                                radius: 20,
-                                hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.notifications_active),
-                              ),
+                              const FirstCommonButton(
+                                  icon: Icons.notifications_active),
                               (0.02 * width).addWSpace(),
                               CircleAvatar(
                                 radius: 0.023 * height,
@@ -242,9 +221,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => VideoPlayScreen(
-                                          video: index,
-                                        ),
+                                        builder: (context) =>
+                                            const VideoPlayScreen(),
                                       ),
                                     );
                                   },
@@ -375,15 +353,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     right: 0.02 * width, left: 20),
                                 child: Row(
                                   children: [
-                                    InkResponse(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        videoController.isHover.value = value;
-                                      },
-                                      radius: 20,
-                                      hoverColor: Colors.grey.withOpacity(0.4),
-                                      child: const Icon(Icons.menu),
-                                    ),
+                                    const FirstCommonButton(icon: Icons.menu),
                                     (20.0).addWSpace(),
                                     Container(
                                       padding: EdgeInsets.symmetric(
@@ -488,27 +458,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       ),
                                     ),
                                     const Spacer(),
-                                    InkResponse(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        videoController.isHover.value = value;
-                                      },
-                                      radius: 20,
-                                      hoverColor: Colors.grey.withOpacity(0.4),
-                                      child:
-                                          const Icon(Icons.video_call_outlined),
-                                    ),
+                                    const FirstCommonButton(
+                                        icon: Icons.video_call_outlined),
                                     (20.0).addWSpace(),
-                                    InkResponse(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        videoController.isHover.value = value;
-                                      },
-                                      radius: 20,
-                                      hoverColor: Colors.grey.withOpacity(0.4),
-                                      child: const Icon(
-                                          Icons.notifications_active),
-                                    ),
+                                    const FirstCommonButton(
+                                        icon: Icons.notifications_active),
                                     (20.0).addWSpace(),
                                     CircleAvatar(
                                       backgroundColor: Colors.purple.shade300,
@@ -749,9 +703,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            VideoPlayScreen(
-                                                          video: index,
-                                                        ),
+                                                            const VideoPlayScreen(),
                                                       ),
                                                     );
                                                   },
@@ -908,15 +860,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: Row(
                                 children: [
-                                  InkResponse(
-                                    onTap: () {},
-                                    onHover: (value) {
-                                      videoController.isHover.value = value;
-                                    },
-                                    radius: 20,
-                                    hoverColor: Colors.grey.withOpacity(0.4),
-                                    child: const Icon(Icons.menu),
-                                  ),
+                                  const FirstCommonButton(icon: Icons.menu),
                                   20.0.addWSpace(),
                                   Container(
                                     padding: EdgeInsets.symmetric(
@@ -1022,27 +966,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     ),
                                   ),
                                   const Spacer(),
-                                  InkResponse(
-                                    onTap: () {},
-                                    onHover: (value) {
-                                      videoController.isHover.value = value;
-                                    },
-                                    radius: 20,
-                                    hoverColor: Colors.grey.withOpacity(0.4),
-                                    child:
-                                        const Icon(Icons.video_call_outlined),
-                                  ),
+                                  const FirstCommonButton(
+                                      icon: Icons.video_call_outlined),
                                   25.0.addWSpace(),
-                                  InkResponse(
-                                    onTap: () {},
-                                    onHover: (value) {
-                                      videoController.isHover.value = value;
-                                    },
-                                    radius: 20,
-                                    hoverColor: Colors.grey.withOpacity(0.4),
-                                    child:
-                                        const Icon(Icons.notifications_active),
-                                  ),
+                                  const FirstCommonButton(
+                                      icon: Icons.notifications_active),
                                   25.0.addWSpace(),
                                   CircleAvatar(
                                     backgroundColor: Colors.purple.shade300,
@@ -1368,9 +1296,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        VideoPlayScreen(
-                                                      video: index,
-                                                    ),
+                                                        const VideoPlayScreen(),
                                                   ),
                                                 );
                                               },

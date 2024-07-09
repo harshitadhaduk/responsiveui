@@ -4,8 +4,7 @@ import 'package:responsive_ui/responsive_ui/Controller/video_controller.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayScreen extends StatefulWidget {
-  final video;
-  const VideoPlayScreen({super.key, this.video});
+  const VideoPlayScreen({super.key});
 
   @override
   State<VideoPlayScreen> createState() => _VideoPlayScreenState();
