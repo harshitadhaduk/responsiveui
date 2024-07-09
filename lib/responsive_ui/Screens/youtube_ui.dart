@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_ui/responsive_ui/Controller/video_controller.dart';
 import 'package:responsive_ui/responsive_ui/Screens/video_play_screen.dart';
+import 'package:responsive_ui/responsive_ui/general/down_button.dart';
+import 'package:responsive_ui/responsive_ui/general/first_raw_common_button.dart';
 import 'package:responsive_ui/responsive_ui/general/sized_box.dart';
+import 'package:responsive_ui/responsive_ui/general/up_button.dart';
 import 'package:video_player/video_player.dart';
 
 class YoutubeUiScreen extends StatefulWidget {
@@ -107,15 +110,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                           Row(
                             children: [
                               5.0.addWSpace(),
-                              InkResponse(
-                                onTap: () {},
-                                onHover: (value) {
-                                  videoController.isHover.value = value;
-                                },
-                                radius: 20,
-                                hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.menu),
-                              ),
+                              const FirstCommonButton(icon: Icons.menu),
                               (0.03 * width).addWSpace(),
                               Container(
                                 padding: EdgeInsets.symmetric(
@@ -139,15 +134,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 ),
                               ),
                               const Spacer(),
-                              InkResponse(
-                                onTap: () {},
-                                onHover: (value) {
-                                  videoController.isHover.value = value;
-                                },
-                                radius: 20,
-                                hoverColor: Colors.grey.withOpacity(0.4),
-                                child: const Icon(Icons.search_sharp),
-                              ),
+                              const FirstCommonButton(icon: Icons.search_sharp),
                               (0.02 * width).addWSpace(),
                               InkResponse(
                                   onTap: () {},
@@ -1515,86 +1502,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                       ),
                     ],
                   ),
-      ),
-    );
-  }
-}
-
-class UpCommonButton extends StatefulWidget {
-  final top;
-  final bottom;
-  final left;
-  final right;
-  final iconSize;
-
-  const UpCommonButton({
-    super.key,
-    this.top,
-    this.bottom,
-    this.left,
-    this.right,
-    this.iconSize,
-  });
-
-  @override
-  State<UpCommonButton> createState() => _UpCommonButtonState();
-}
-
-class _UpCommonButtonState extends State<UpCommonButton> {
-  VideoController videoController = Get.put(VideoController());
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      left: widget.left,
-      top: widget.top,
-      bottom: widget.bottom,
-      right: widget.right,
-      child: InkResponse(
-        onTap: () {
-          videoController.scrollController
-              .jumpTo(videoController.scrollController.offset - 70);
-        },
-        child: Icon(
-          Icons.arrow_drop_up,
-          size: widget.iconSize,
-        ),
-      ),
-    );
-  }
-}
-
-class DownCommonButton extends StatefulWidget {
-  final top;
-  final bottom;
-  final left;
-  final right;
-  final iconSize;
-  const DownCommonButton(
-      {super.key, this.top, this.bottom, this.left, this.right, this.iconSize});
-
-  @override
-  State<DownCommonButton> createState() => _DownCommonButtonState();
-}
-
-class _DownCommonButtonState extends State<DownCommonButton> {
-  VideoController videoController = Get.put(VideoController());
-  @override
-  Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    return Positioned(
-      bottom: widget.bottom,
-      left: widget.left,
-      top: widget.top,
-      right: widget.right,
-      child: InkResponse(
-        onTap: () {
-          videoController.scrollController
-              .jumpTo(videoController.scrollController.offset + 70);
-        },
-        child: Icon(
-          Icons.arrow_drop_down,
-          size: widget.iconSize,
-        ),
       ),
     );
   }
