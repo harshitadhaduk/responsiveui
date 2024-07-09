@@ -4,8 +4,10 @@ import 'package:responsive_ui/responsive_ui/Controller/video_controller.dart';
 import 'package:responsive_ui/responsive_ui/Screens/video_play_screen.dart';
 import 'package:responsive_ui/responsive_ui/general/down_button.dart';
 import 'package:responsive_ui/responsive_ui/general/first_raw_common_button.dart';
+import 'package:responsive_ui/responsive_ui/general/profile_circle.dart';
 import 'package:responsive_ui/responsive_ui/general/sized_box.dart';
 import 'package:responsive_ui/responsive_ui/general/up_button.dart';
+import 'package:responsive_ui/responsive_ui/general/youtube_logo.dart';
 import 'package:video_player/video_player.dart';
 
 class YoutubeUiScreen extends StatefulWidget {
@@ -26,6 +28,12 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     "Flutter",
     "Jukebox",
     "Indian soap operas",
+  ];
+  List<Map<String, dynamic>> tabletData = [
+    {"icon": Icons.home, "name": "Home"},
+    {"icon": Icons.send, "name": "Shorts"},
+    {"icon": Icons.subscriptions, "name": "Subscription"},
+    {"icon": Icons.person, "name": "You"},
   ];
   List<Map<String, dynamic>> sideMenuData = [
     {"icon": Icons.home, "name": "Home"},
@@ -95,6 +103,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
       body: SafeArea(
         child: width <= 600
             ? Stack(
+                clipBehavior: Clip.none,
                 children: [
                   RawScrollbar(
                     controller: videoController.scrollController,
@@ -111,27 +120,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                               5.0.addWSpace(),
                               const FirstCommonButton(icon: Icons.menu),
                               (0.03 * width).addWSpace(),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 0.015 * width,
-                                    vertical: 0.003 * height),
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius:
-                                      BorderRadius.circular(0.01 * height),
-                                ),
-                                child: const Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                "YouTube",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 0.045 * width,
-                                ),
-                              ),
+                              const YoutubeLogo(textSize: 20),
                               const Spacer(),
                               const FirstCommonButton(icon: Icons.search_sharp),
                               (0.02 * width).addWSpace(),
@@ -143,16 +132,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                               const FirstCommonButton(
                                   icon: Icons.notifications_active),
                               (0.02 * width).addWSpace(),
-                              CircleAvatar(
-                                radius: 0.023 * height,
-                                backgroundColor: Colors.purple.shade300,
-                                child: const Text(
-                                  "H",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
+                              const ProfileCircle(),
                             ],
                           ),
                           (0.015 * height).addHSpace(),
@@ -226,91 +206,85 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     );
                                   },
                                   radius: 10,
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 0.015 * height,
-                                        horizontal: 0.02 * width),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 0.35 * height,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                    "${videoController.allData[index]["image"]}"),
-                                                fit: BoxFit.cover),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 0.35 * height,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  "${videoController.allData[index]["image"]}"),
+                                              fit: BoxFit.cover),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                         ),
-                                        (0.01 * height).addHSpace(),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CircleAvatar(
-                                              radius: 0.035 * width,
-                                              backgroundImage: NetworkImage(
-                                                  "${videoController.allData[index]["logo"]}"),
-                                            ),
-                                            (0.02 * width).addWSpace(),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "${videoController.allData[index]["title"]}",
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                      ),
+                                      (0.01 * height).addHSpace(),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 0.035 * width,
+                                            backgroundImage: NetworkImage(
+                                                "${videoController.allData[index]["logo"]}"),
+                                          ),
+                                          (0.02 * width).addWSpace(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "${videoController.allData[index]["title"]}",
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                                Text(
-                                                  "${videoController.allData[index]["name"]}",
-                                                  style: const TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 14,
-                                                  ),
+                                              ),
+                                              Text(
+                                                "${videoController.allData[index]["name"]}",
+                                                style: const TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14,
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "${videoController.allData[index]["views"]}",
-                                                      style: const TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                    (0.015 * width).addWSpace(),
-                                                    Icon(
-                                                      Icons.circle,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "${videoController.allData[index]["views"]}",
+                                                    style: const TextStyle(
                                                       color: Colors.grey,
-                                                      size: 0.01 * height,
+                                                      fontSize: 14,
                                                     ),
-                                                    (0.015 * width).addWSpace(),
-                                                    Text(
-                                                      "${videoController.allData[index]["time"]}",
-                                                      style: const TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14,
-                                                      ),
+                                                  ),
+                                                  (0.015 * width).addWSpace(),
+                                                  Icon(
+                                                    Icons.circle,
+                                                    color: Colors.grey,
+                                                    size: 0.01 * height,
+                                                  ),
+                                                  (0.015 * width).addWSpace(),
+                                                  Text(
+                                                    "${videoController.allData[index]["time"]}",
+                                                    style: const TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 14,
                                                     ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            const Spacer(),
-                                            InkResponse(
-                                              onTap: () {},
-                                              child:
-                                                  const Icon(Icons.more_vert),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          const Spacer(),
+                                          InkResponse(
+                                            onTap: () {},
+                                            child: const Icon(Icons.more_vert),
+                                          ),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 );
                               },
@@ -354,24 +328,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   children: [
                                     const FirstCommonButton(icon: Icons.menu),
                                     (20.0).addWSpace(),
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 0.015 * width,
-                                          vertical: 0.003 * height),
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(
-                                            0.01 * height),
-                                      ),
-                                      child: const Icon(Icons.play_arrow),
-                                    ),
-                                    const Text(
-                                      "YouTube",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                    ),
+                                    const YoutubeLogo(textSize: 20),
                                     const Spacer(),
                                     Container(
                                       height: 0.05 * height,
@@ -463,13 +420,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     const FirstCommonButton(
                                         icon: Icons.notifications_active),
                                     (20.0).addWSpace(),
-                                    CircleAvatar(
-                                      backgroundColor: Colors.purple.shade300,
-                                      child: const Text(
-                                        "H",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
+                                    const ProfileCircle(),
                                   ],
                                 ),
                               ),
@@ -483,8 +434,9 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                       padding:
                                           EdgeInsets.only(right: 0.01 * width),
                                       child: Column(
-                                        children: [
-                                          InkWell(
+                                        children: List.generate(
+                                          tabletData.length,
+                                          (index) => InkWell(
                                             onTap: () {},
                                             onHover: (value) {
                                               videoController.isHover.value =
@@ -499,12 +451,13 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                               padding:
                                                   const EdgeInsets.symmetric(
                                                       vertical: 10),
-                                              child: const Column(
+                                              child: Column(
                                                 children: [
-                                                  Icon(Icons.home),
+                                                  Icon(tabletData[index]
+                                                      ["icon"]),
                                                   Text(
-                                                    "Home",
-                                                    style: TextStyle(
+                                                    "${tabletData[index]["name"]}",
+                                                    style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 10,
                                                     ),
@@ -513,93 +466,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                               ),
                                             ),
                                           ),
-                                          InkWell(
-                                            onTap: () {},
-                                            onHover: (value) {
-                                              videoController.isHover.value =
-                                                  value;
-                                            },
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            hoverColor:
-                                                Colors.grey.withOpacity(0.4),
-                                            child: Container(
-                                              width: 60,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10),
-                                              child: const Column(
-                                                children: [
-                                                  Icon(Icons.add),
-                                                  Text(
-                                                    "Shorts",
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 10),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {},
-                                            onHover: (value) {
-                                              videoController.isHover.value =
-                                                  value;
-                                            },
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            hoverColor:
-                                                Colors.grey.withOpacity(0.4),
-                                            child: Container(
-                                              width: 60,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10),
-                                              child: const Column(
-                                                children: [
-                                                  Icon(Icons.subscriptions),
-                                                  Text(
-                                                    "Subscription",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 10,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {},
-                                            onHover: (value) {
-                                              videoController.isHover.value =
-                                                  value;
-                                            },
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            hoverColor:
-                                                Colors.grey.withOpacity(0.4),
-                                            child: Container(
-                                              width: 60,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10),
-                                              child: const Column(
-                                                children: [
-                                                  Icon(Icons.person),
-                                                  Text(
-                                                    "You",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 10,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
@@ -861,27 +728,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 children: [
                                   const FirstCommonButton(icon: Icons.menu),
                                   20.0.addWSpace(),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 0.01 * width,
-                                        vertical: 0.003 * height),
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius:
-                                          BorderRadius.circular(0.01 * height),
-                                    ),
-                                    child: const Icon(
-                                      Icons.play_arrow,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    "YouTube",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 0.02 * width,
-                                    ),
-                                  ),
+                                  const YoutubeLogo(textSize: 22),
                                   120.0.addWSpace(),
                                   Container(
                                     height: 0.05 * height,
@@ -971,15 +818,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   const FirstCommonButton(
                                       icon: Icons.notifications_active),
                                   25.0.addWSpace(),
-                                  CircleAvatar(
-                                    backgroundColor: Colors.purple.shade300,
-                                    child: const Text(
-                                      "H",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
+                                  const ProfileCircle(),
                                 ],
                               ),
                             ),
