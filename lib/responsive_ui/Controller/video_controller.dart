@@ -114,9 +114,10 @@ class VideoController extends GetxController {
           "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
     },
   ];
-  // List<VideoPlayerController?> videoData = [];
+  List<VideoPlayerController?> videoData = [];
   VideoPlayerController? video;
   var selectVideo = 0.obs;
+  var selectVideo2 = (-1).obs;
   var select = 0.obs;
   var selectFunction = 0.obs;
   late ScrollController scrollController;

@@ -63,7 +63,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     {"icon": Icons.help_center_outlined, "name": "Send FeedBack"},
     {"icon": Icons.abc, "name": ""},
   ];
-  int selectVideo = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -71,35 +70,38 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
-      floatingActionButton: selectVideo == -1
-          ? const SizedBox()
-          : Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: 0.2 * height,
-                  width: 0.4 * width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+      floatingActionButton: Obx(
+        () => videoController.selectVideo2.value == -1
+            ? const SizedBox()
+            : Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: 0.2 * height,
+                    width: 0.4 * width,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: VideoPlayer(videoController.video!),
                   ),
-                  child: VideoPlayer(videoController.video!),
-                ),
-                InkResponse(
-                  onTap: () {
-                    setState(() {
+                  InkResponse(
+                    onTap: () {
+                      setState(() {
+                        videoController.video!.value.isPlaying
+                            ? videoController.video!.pause()
+                            : videoController.video!.play();
+                      });
+                    },
+                    child: Icon(
                       videoController.video!.value.isPlaying
-                          ? videoController.video!.pause()
-                          : videoController.video!.play();
-                    });
-                  },
-                  child: Icon(
-                    videoController.video!.value.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow,
+                          ? Icons.pause
+                          : Icons.play_arrow,
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+      ),
       body: SafeArea(
         child: width <= 600
             ? Stack(
@@ -193,9 +195,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                 return InkWell(
                                   borderRadius: BorderRadius.circular(10),
                                   onTap: () {
-                                    setState(() {
-                                      selectVideo = index;
-                                    });
+                                    videoController.selectVideo2.value = index;
+
                                     videoController.selectVideo.value = index;
                                     Navigator.push(
                                       context,
@@ -206,85 +207,90 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                     );
                                   },
                                   radius: 10,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 0.35 * height,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "${videoController.allData[index]["image"]}"),
-                                              fit: BoxFit.cover),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 0.01 * height),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 0.35 * height,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    "${videoController.allData[index]["image"]}"),
+                                                fit: BoxFit.cover),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
                                         ),
-                                      ),
-                                      (0.01 * height).addHSpace(),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 0.035 * width,
-                                            backgroundImage: NetworkImage(
-                                                "${videoController.allData[index]["logo"]}"),
-                                          ),
-                                          (0.02 * width).addWSpace(),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "${videoController.allData[index]["title"]}",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                "${videoController.allData[index]["name"]}",
-                                                style: const TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "${videoController.allData[index]["views"]}",
-                                                    style: const TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 14,
-                                                    ),
+                                        (0.01 * height).addHSpace(),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 0.035 * width,
+                                              backgroundImage: NetworkImage(
+                                                  "${videoController.allData[index]["logo"]}"),
+                                            ),
+                                            (0.02 * width).addWSpace(),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${videoController.allData[index]["title"]}",
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
-                                                  (0.015 * width).addWSpace(),
-                                                  Icon(
-                                                    Icons.circle,
+                                                ),
+                                                Text(
+                                                  "${videoController.allData[index]["name"]}",
+                                                  style: const TextStyle(
                                                     color: Colors.grey,
-                                                    size: 0.01 * height,
+                                                    fontSize: 14,
                                                   ),
-                                                  (0.015 * width).addWSpace(),
-                                                  Text(
-                                                    "${videoController.allData[index]["time"]}",
-                                                    style: const TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 14,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      "${videoController.allData[index]["views"]}",
+                                                      style: const TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 14,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          const Spacer(),
-                                          InkResponse(
-                                            onTap: () {},
-                                            child: const Icon(Icons.more_vert),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                                    (0.015 * width).addWSpace(),
+                                                    Icon(
+                                                      Icons.circle,
+                                                      color: Colors.grey,
+                                                      size: 0.01 * height,
+                                                    ),
+                                                    (0.015 * width).addWSpace(),
+                                                    Text(
+                                                      "${videoController.allData[index]["time"]}",
+                                                      style: const TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            const Spacer(),
+                                            InkResponse(
+                                              onTap: () {},
+                                              child:
+                                                  const Icon(Icons.more_vert),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 );
                               },
@@ -560,9 +566,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                               itemBuilder: (context, index) {
                                                 return InkWell(
                                                   onTap: () {
-                                                    setState(() {
-                                                      selectVideo = index;
-                                                    });
+                                                    videoController.selectVideo2
+                                                        .value = index;
                                                     videoController.selectVideo
                                                         .value = index;
                                                     Navigator.push(
@@ -1125,9 +1130,8 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                           itemBuilder: (context, index) {
                                             return InkWell(
                                               onTap: () {
-                                                setState(() {
-                                                  selectVideo = index;
-                                                });
+                                                videoController
+                                                    .selectVideo2.value = index;
                                                 videoController
                                                     .selectVideo.value = index;
                                                 Navigator.push(
