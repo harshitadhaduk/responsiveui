@@ -119,10 +119,11 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                           (0.015 * height).addHSpace(),
                           Row(
                             children: [
-                              5.0.addWSpace(),
+                              // 5.0.addWSpace(),
                               const FirstCommonButton(icon: Icons.menu),
                               (0.03 * width).addWSpace(),
-                              const YoutubeLogo(textSize: 20),
+                              // const YoutubeLogo(textSize: 20),
+                              const YoutubeLogo(textSize: 20.0),
                               const Spacer(),
                               const FirstCommonButton(icon: Icons.search_sharp),
                               (0.02 * width).addWSpace(),
@@ -196,7 +197,6 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                                   borderRadius: BorderRadius.circular(10),
                                   onTap: () {
                                     videoController.selectVideo2.value = index;
-
                                     videoController.selectVideo.value = index;
                                     Navigator.push(
                                       context,
@@ -305,7 +305,7 @@ class _YoutubeUiScreenState extends State<YoutubeUiScreen> {
                       right: 0.0 * width,
                       iconSize: 0.04 * width),
                   DownCommonButton(
-                    bottom: 0,
+                    bottom: 0.0,
                     left: 0.97 * width,
                     right: 0.0 * width,
                     iconSize: 0.04 * width,

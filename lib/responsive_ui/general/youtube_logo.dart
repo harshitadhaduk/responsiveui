@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class YoutubeLogo extends StatefulWidget {
-  final textSize;
+  final double? textSize;
   const YoutubeLogo({super.key, this.textSize});
 
   @override
