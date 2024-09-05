@@ -12,7 +12,7 @@ class DataAddScreen extends StatefulWidget {
 class _DataAddScreenState extends State<DataAddScreen> {
   @override
   Widget build(BuildContext context) {
-    final dataAddProvider = Provider.of<DataAddProvider>(context);
+    // final dataAddProvider = Provider.of<DataAddProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
