@@ -13,7 +13,7 @@ class _DemoScreenState extends State<DemoScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<IncrementProvider>(context, listen: true);
-    final provider1 = context.watch<IncrementProvider>();
+    // final provider1 = context.watch<IncrementProvider>();
 
     return Scaffold(
       body: Center(

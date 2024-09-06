@@ -12,38 +12,37 @@ class DataAddScreen extends StatefulWidget {
 class _DataAddScreenState extends State<DataAddScreen> {
   @override
   Widget build(BuildContext context) {
-    // final dataAddProvider = Provider.of<DataAddProvider>(context);
+    final dataAddProvider = Provider.of<DataAddProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Consumer<DataAddProvider>(
-            builder: (context, dataAddProvider, child) => Column(
-              children: [
-                TextField(
-                  controller: dataAddProvider.data,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    hintText: "Add Data",
-                    hintStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
+          child: Column(
+            children: [
+              TextField(
+                cursorColor: Colors.black,
+                controller: dataAddProvider.data,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  hintText: "Add Data",
+                  hintStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    dataAddProvider.dataAdd();
-                  },
-                  child: const Text("Submit"),
-                ),
-                Expanded(
+              ),
+              TextButton(
+                onPressed: () {
+                  dataAddProvider.dataAdd();
+                },
+                child: const Text("Submit"),
+              ),
+              Consumer<DataAddProvider>(
+                builder: (context, dataAddProvider, child) => Expanded(
                   child: dataAddProvider.storeData.isEmpty
-                      ? const Center(
-                          child: Text("data Not available"),
-                        )
+                      ? const Center(child: Text("data Not available"))
                       : ListView.builder(
                           itemCount: dataAddProvider.storeData.length,
                           itemBuilder: (context, index) {
@@ -123,8 +122,8 @@ class _DataAddScreenState extends State<DataAddScreen> {
                           },
                         ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
