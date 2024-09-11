@@ -54,39 +54,45 @@ class _DataAddScreenState extends State<DataAddScreen> {
                                     dataAddProvider.updateText.text =
                                         "${dataAddProvider.storeData[index]}";
                                     return Dialog(
-                                      insetPadding: const EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 10),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          TextField(
-                                            controller:
-                                                dataAddProvider.updateText,
-                                            decoration: InputDecoration(
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.black),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 10),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextField(
+                                              controller:
+                                                  dataAddProvider.updateText,
+                                              decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  borderSide: const BorderSide(
+                                                      color: Colors.black),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                          TextButton(
-                                            onPressed: () {
-                                              dataAddProvider.updateData(index);
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text("Update"),
-                                          ),
-                                          const SizedBox(height: 10),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: const Text("Cancel"),
-                                          ),
-                                        ],
+                                            const SizedBox(height: 5),
+                                            TextButton(
+                                              onPressed: () {
+                                                dataAddProvider
+                                                    .updateData(index);
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text("Update"),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text("Cancel"),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     );
                                   },
@@ -112,7 +118,7 @@ class _DataAddScreenState extends State<DataAddScreen> {
                                       },
                                       icon: const Icon(
                                         Icons.delete,
-                                        color: Colors.black,
+                                        color: Colors.red,
                                       ),
                                     ),
                                   ],

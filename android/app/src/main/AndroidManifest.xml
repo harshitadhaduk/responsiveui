@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <application
         android:label="responsive_ui"
         android:name="${applicationName}"
@@ -26,6 +27,8 @@
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCvNGtYHahFH5J5j_-qq8cH7qR4yAAwaX0"/>
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
@@ -35,6 +38,7 @@
          https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
 
          In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
