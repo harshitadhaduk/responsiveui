@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_ui/GoogleMap/map_screen.dart';
 import 'package:responsive_ui/ProviderScreens/data_add_screen.dart';
 import 'package:responsive_ui/demo_screen.dart';
 import 'package:responsive_ui/google_map_sample.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        home: const MapSample(),
+        home: const MapScreen(),
       ),
     );
   }

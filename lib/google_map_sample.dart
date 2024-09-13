@@ -1,22 +1,28 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:responsive_ui/GoogleMap/Controller/location_controller.dart';
 
 class MapSample extends StatefulWidget {
-  const MapSample({super.key});
+  final double? lat;
+  final double? lon;
+  const MapSample({super.key, this.lat, this.lon});
 
   @override
   State<MapSample> createState() => MapSampleState();
 }
 
 class MapSampleState extends State<MapSample> {
+  LocationController locationController = Get.put(LocationController());
+
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  // static const CameraPosition _kGooglePlex = CameraPosition(
+  //   target: LatLng(37.42796133580664, -122.085749655962),
+  //   zoom: 14.4746,
+  // );
 
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
@@ -27,12 +33,20 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+      body: Center(
+        child: SizedBox(
+          height: 500,
+          child: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(widget.lat!, widget.lon!),
+              zoom: 15,
+            ),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,

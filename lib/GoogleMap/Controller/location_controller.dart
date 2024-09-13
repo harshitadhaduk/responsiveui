@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -48,9 +46,7 @@ class LocationController extends GetxController {
     List<Placemark> placeMark =
         await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark place = placeMark[0];
-    address.value = "Address : ${place.locality}, ${place.country}";
+    address.value =
+        "Address : ${place.subLocality}, ${place.locality}, ${place.administrativeArea}, ${place.country}";
   }
 }
-
-// target: LatLng(
-//     locationController.latitude.value, locationController.longitude.value),
