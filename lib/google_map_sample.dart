@@ -37,7 +37,38 @@ class MapSampleState extends State<MapSample> {
         child: SizedBox(
           height: 500,
           child: GoogleMap(
-            mapType: MapType.normal,
+            myLocationEnabled: true,
+            mapType: MapType.terrain,
+            markers: {
+              Marker(
+                markerId: const MarkerId('user_location'),
+                position: LatLng(widget.lat!, widget.lon!),
+                infoWindow: const InfoWindow(title: 'Your Location'),
+              ),
+            },
+            polylines: {
+              Polyline(
+                polylineId: const PolylineId("second value"),
+                jointType: JointType.round,
+                endCap: Cap.buttCap,
+                color: Colors.blue.shade700,
+                width: 5,
+                points: [
+                  LatLng(widget.lat!, widget.lon!),
+                  LatLng(widget.lat! + 0.005, widget.lon! + 0.01),
+                ],
+              ),
+            },
+
+            // circles: {
+            //   Circle(
+            //     strokeWidth: 150,
+            //     strokeColor: Colors.grey.withOpacity(0.15),
+            //     circleId: const CircleId("Anupam"),
+            //     center: LatLng(widget.lat!, widget.lon!),
+            //     radius: 2,
+            //   ),
+            // },
             initialCameraPosition: CameraPosition(
               target: LatLng(widget.lat!, widget.lon!),
               zoom: 15,
